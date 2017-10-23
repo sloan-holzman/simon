@@ -1,0 +1,20 @@
+.light {
+  width: 100px;
+  height: 100px;
+}
+
+#light1 {
+  background-color: green;
+}
+
+#light2 {
+  background-color: red;
+}
+
+#light3 {
+  background-color: yellow;
+}
+
+#light4 {
+  background-color: blue;
+}
