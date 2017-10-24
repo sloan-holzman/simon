@@ -12,6 +12,9 @@ let userTurn = false;
 let loopIndex = 0;
 let slider = $("#myRange");
 let output = $(".sliderValue");
+let defaultTimeLeft = 5;
+let timeLeft = defaultTimeLeft;
+let timer;
 let codes = {
   light1: 1,
   light2: 2,
@@ -32,6 +35,8 @@ let speeds = {
 let defaultSpeed = 5;
 let speed = defaultSpeed;
 let delay = speeds[`${speed}`];
+slider.val(`${speed}`);
+output.text(`Speed: ${speed}`);
 
 function createSequence(level) {
   if (level === 1) {
@@ -53,6 +58,9 @@ function loopSequence(sequence) {
     // (4) if the end of the array has been reached, stop
     if (++loopIndex >= sequence.length) {
       userTurn = true;
+      timer = setInterval(function() {
+        responseTimer();
+      }, 1000);
       return;
     }
     loopSequence(sequence);
@@ -89,6 +97,7 @@ function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
     if (answer[i] !== userInput[i]) {
       alert("incorrect answer");
+      restartGame();
       return;
     }
   }
@@ -109,12 +118,16 @@ function resetVariables() {
   userAnswer = [];
   userTurn = false;
   loopIndex = 0;
+  timeLeft = defaultTimeLeft;
+  $("#countdowntimer").text(timeLeft);
   levelDisplay.text(`Level ${level}`);
 }
 function increaseLevel() {
   level += 1;
   resetVariables();
   increaseSpeed(level);
+  console.log(`level ${level}`);
+  console.log(`sequence ${sequence}`);
   alert(`you got it!!  click start when you are ready to begin level ${level}`);
 }
 
@@ -134,6 +147,7 @@ lights.click(function(e) {
     $(e.target).is(".light")
   ) {
     userAnswer.push(codes[$(e.target).attr("id")]);
+    stopTimer();
     flashLight($(e.target));
     if (userAnswer.length === sequence.length) {
       checkAnswer(sequence, userAnswer);
@@ -153,3 +167,15 @@ slider.change(function() {
   speed = parseInt(slider.val());
   delay = speeds[parseInt(slider.val())];
 });
+
+function responseTimer() {
+  timeLeft--;
+  $("#countdowntimer").text(timeLeft);
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
+}
