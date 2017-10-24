@@ -1,7 +1,7 @@
-console.log("hello world!");
 let level = 1;
 let sequence = [];
 let userAnswer = [];
+let levelDisplay = $(".level");
 let lights = $(".lights");
 let firstLight = $("#light1");
 let secondLight = $("#light2");
@@ -19,21 +19,21 @@ let codes = {
 };
 
 function createSequence(level) {
-  for (let i = 0; i < level + 3; i++) {
-    let randomSquare = Math.round(Math.random() * 3) + 1;
-    sequence.push(randomSquare);
+  if (level === 1) {
+    for (let i = 0; i < 4; i++) {
+      let randomLight = Math.round(Math.random() * 3) + 1;
+      sequence.push(randomLight);
+    }
+  } else {
+    let randomLight = Math.round(Math.random() * 3) + 1;
+    sequence.push(randomLight);
   }
-  console.log("level 2 sequence created");
-  console.log(`loop index ${loopIndex}`);
 }
 
 // (2) define the delayed loop function
 function loopSequence(sequence) {
   setTimeout(function() {
     // (3) do action
-    console.log(`iteration ${loopIndex}`);
-    console.log(`value ${sequence[loopIndex]}`);
-    console.log(`sequence length ${sequence.length}`);
     checkLight(sequence[loopIndex]);
 
     // (4) if the end of the array has been reached, stop
@@ -51,19 +51,15 @@ function checkLight(light) {
   switch (light) {
     case 1:
       flashLight(firstLight);
-      console.log("1 changed");
       break;
     case 2:
       flashLight(secondLight);
-      console.log("2 changed");
       break;
     case 3:
       flashLight(thirdLight);
-      console.log("3 changed");
       break;
     case 4:
       flashLight(fourthLight);
-      console.log("4 changed");
       break;
     default:
       console.log(light);
@@ -73,7 +69,6 @@ function checkLight(light) {
 function flashLight(light) {
   light.css("opacity", 1);
   setTimeout(function() {
-    console.log("change");
     light.css("opacity", 0.2);
   }, delay / 2);
 }
@@ -81,28 +76,25 @@ function flashLight(light) {
 function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
     if (answer[i] !== userInput[i]) {
+      level = 1;
+      sequence = [];
       reset();
+      alert("incorrect answer");
       return;
     }
   }
   increaseLevel();
 }
 
-//some repetition between reset and increaseLevel...maybe create another function
 function reset() {
-  level = 1;
-  sequence = [];
   userAnswer = [];
   userTurn = false;
   loopIndex = 0;
-  alert("incorrect answer");
+  levelDisplay.text(`Level ${level}`);
 }
 function increaseLevel() {
-  level += level;
-  sequence = [];
-  userAnswer = [];
-  userTurn = false;
-  loopIndex = 0;
+  level += 1;
+  reset();
   alert(`you got it!!  click start when you are ready to begin level ${level}`);
 }
 
@@ -123,7 +115,6 @@ lights.click(function(e) {
 
 startButton.click(function(e) {
   e.preventDefault();
-  console.log("start button clicked");
   createSequence(level);
   loopSequence(sequence);
 });
