@@ -119,7 +119,8 @@ function resetVariables() {
   userTurn = false;
   loopIndex = 0;
   timeLeft = defaultTimeLeft;
-  $("#countdowntimer").text(timeLeft);
+  stopTimer();
+  $(".countdown").text(``);
   levelDisplay.text(`Level ${level}`);
 }
 function increaseLevel() {
@@ -170,9 +171,10 @@ slider.change(function() {
 
 function responseTimer() {
   timeLeft--;
-  $("#countdowntimer").text(timeLeft);
+  $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
   if (timeLeft <= 0) {
-    clearInterval(timer);
+    alert("ran out of time!  you lose");
+    restartGame();
   }
 }
 
