@@ -123,3 +123,11 @@ startButton.click(function(e) {
   createSequence(level);
   loopSequence(sequence);
 });
+
+var slider = $("#myRange");
+var output = $(".sliderValue");
+
+// Update the current slider value (each time you drag the slider handle)
+slider.change(function() {
+  output.text(parseInt(slider.val()));
+});
