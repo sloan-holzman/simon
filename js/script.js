@@ -72,6 +72,22 @@ function flashLight(light) {
   }, 500);
 }
 
+function checkAnswer(answer, userInput) {
+  for (let i = 0; i < answer.length; i++) {
+    if (answer[i] !== userInput[i]) {
+      alert("incorrect answer");
+      reset();
+      return;
+    }
+  }
+  alert("you got it!!");
+  increaseLevel();
+}
+
+//MUST WRITE THESE TWO FUNCTIONS
+function reset() {}
+function increaseLevel() {}
+
 //need to click for the parent and then if child contains...but this works for now
 firstLight.click(function(e) {
   e.preventDefault();
@@ -79,6 +95,10 @@ firstLight.click(function(e) {
     userAnswer.push(1);
     console.log(userAnswer);
     flashLight(firstLight);
+    console.log(`user answer length ${userAnswer.length}`);
+    if (userAnswer.length === sequence.length) {
+      checkAnswer(sequence, userAnswer);
+    }
   }
 });
 
@@ -88,6 +108,10 @@ secondLight.click(function(e) {
     userAnswer.push(2);
     console.log(userAnswer);
     flashLight(secondLight);
+    console.log(`user answer length ${userAnswer.length}`);
+    if (userAnswer.length === sequence.length) {
+      checkAnswer(sequence, userAnswer);
+    }
   }
 });
 
@@ -97,6 +121,10 @@ thirdLight.click(function(e) {
     userAnswer.push(3);
     console.log(userAnswer);
     flashLight(thirdLight);
+    console.log(`user answer length ${userAnswer.length}`);
+    if (userAnswer.length === sequence.length) {
+      checkAnswer(sequence, userAnswer);
+    }
   }
 });
 
@@ -106,6 +134,10 @@ fourthLight.click(function(e) {
     userAnswer.push(4);
     console.log(userAnswer);
     flashLight(fourthLight);
+    console.log(`user answer length ${userAnswer.length}`);
+    if (userAnswer.length === sequence.length) {
+      checkAnswer(sequence, userAnswer);
+    }
   }
 });
 
