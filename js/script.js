@@ -30,7 +30,6 @@ function createSequence(level) {
   }
 }
 
-// (2) define the delayed loop function
 function loopSequence(sequence) {
   setTimeout(function() {
     // (3) do action
@@ -43,8 +42,6 @@ function loopSequence(sequence) {
     }
     loopSequence(sequence);
   }, delay);
-
-  // (5) recursively call the delayed loop function with a delay
 }
 
 function checkLight(light) {
@@ -78,7 +75,8 @@ function checkAnswer(answer, userInput) {
     if (answer[i] !== userInput[i]) {
       level = 1;
       sequence = [];
-      reset();
+      resetVariables();
+      delay = 1000;
       alert("incorrect answer");
       return;
     }
@@ -86,7 +84,7 @@ function checkAnswer(answer, userInput) {
   increaseLevel();
 }
 
-function reset() {
+function resetVariables() {
   userAnswer = [];
   userTurn = false;
   loopIndex = 0;
@@ -94,8 +92,15 @@ function reset() {
 }
 function increaseLevel() {
   level += 1;
-  reset();
+  resetVariables();
+  increaseSpeed(level);
   alert(`you got it!!  click start when you are ready to begin level ${level}`);
+}
+
+function increaseSpeed(level) {
+  if (level === 6 || level === 10 || level === 14) {
+    delay = delay * 0.8;
+  }
 }
 
 lights.click(function(e) {
