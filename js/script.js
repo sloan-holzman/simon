@@ -81,7 +81,6 @@ function flashLight(light) {
 function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
     if (answer[i] !== userInput[i]) {
-      alert("incorrect answer");
       reset();
       return;
     }
@@ -89,8 +88,15 @@ function checkAnswer(answer, userInput) {
   increaseLevel();
 }
 
-//MUST WRITE THESE TWO FUNCTIONS
-function reset() {}
+//some repetition between reset and increaseLevel...maybe create another function
+function reset() {
+  level = 1;
+  sequence = [];
+  userAnswer = [];
+  userTurn = false;
+  loopIndex = 0;
+  alert("incorrect answer");
+}
 function increaseLevel() {
   level += level;
   sequence = [];
