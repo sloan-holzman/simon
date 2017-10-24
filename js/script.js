@@ -10,6 +10,7 @@ let fourthLight = $("#light4");
 let startButton = $("#start");
 let delay = 1000;
 let userTurn = false;
+let loopIndex = 0;
 let codes = {
   light1: 1,
   light2: 2,
@@ -22,22 +23,21 @@ function createSequence(level) {
     let randomSquare = Math.round(Math.random() * 3) + 1;
     sequence.push(randomSquare);
   }
+  console.log("level 2 sequence created");
+  console.log(`loop index ${loopIndex}`);
 }
-
-// (1) define the variable for the array index
-var i = 0;
 
 // (2) define the delayed loop function
 function loopSequence(sequence) {
   setTimeout(function() {
     // (3) do action
-    console.log(`iteration ${i}`);
-    console.log(`value ${sequence[i]}`);
+    console.log(`iteration ${loopIndex}`);
+    console.log(`value ${sequence[loopIndex]}`);
     console.log(`sequence length ${sequence.length}`);
-    checkLight(sequence[i]);
+    checkLight(sequence[loopIndex]);
 
     // (4) if the end of the array has been reached, stop
-    if (++i >= sequence.length) {
+    if (++loopIndex >= sequence.length) {
       userTurn = true;
       return;
     }
@@ -86,13 +86,19 @@ function checkAnswer(answer, userInput) {
       return;
     }
   }
-  alert("you got it!!");
   increaseLevel();
 }
 
 //MUST WRITE THESE TWO FUNCTIONS
 function reset() {}
-function increaseLevel() {}
+function increaseLevel() {
+  level += level;
+  sequence = [];
+  userAnswer = [];
+  userTurn = false;
+  loopIndex = 0;
+  alert(`you got it!!  click start when you are ready to begin level ${level}`);
+}
 
 lights.click(function(e) {
   e.preventDefault();
@@ -111,7 +117,7 @@ lights.click(function(e) {
 
 startButton.click(function(e) {
   e.preventDefault();
-  console.log("clicked");
+  console.log("start button clicked");
   createSequence(level);
   loopSequence(sequence);
 });
