@@ -10,6 +10,12 @@ let fourthLight = $("#light4");
 let startButton = $("#start");
 let delay = 1000;
 let userTurn = false;
+let codes = {
+  light1: 1,
+  light2: 2,
+  light3: 3,
+  light4: 4
+};
 
 function createSequence(level) {
   for (let i = 0; i < level + 3; i++) {
@@ -69,7 +75,7 @@ function flashLight(light) {
   setTimeout(function() {
     console.log("change");
     light.css("opacity", 0.2);
-  }, 500);
+  }, delay / 2);
 }
 
 function checkAnswer(answer, userInput) {
@@ -88,53 +94,15 @@ function checkAnswer(answer, userInput) {
 function reset() {}
 function increaseLevel() {}
 
-//need to click for the parent and then if child contains...but this works for now
-firstLight.click(function(e) {
+lights.click(function(e) {
   e.preventDefault();
-  if (userAnswer.length < sequence.length && userTurn) {
-    userAnswer.push(1);
-    console.log(userAnswer);
-    flashLight(firstLight);
-    console.log(`user answer length ${userAnswer.length}`);
-    if (userAnswer.length === sequence.length) {
-      checkAnswer(sequence, userAnswer);
-    }
-  }
-});
-
-secondLight.click(function(e) {
-  e.preventDefault();
-  if (userAnswer.length < sequence.length && userTurn) {
-    userAnswer.push(2);
-    console.log(userAnswer);
-    flashLight(secondLight);
-    console.log(`user answer length ${userAnswer.length}`);
-    if (userAnswer.length === sequence.length) {
-      checkAnswer(sequence, userAnswer);
-    }
-  }
-});
-
-thirdLight.click(function(e) {
-  e.preventDefault();
-  if (userAnswer.length < sequence.length && userTurn) {
-    userAnswer.push(3);
-    console.log(userAnswer);
-    flashLight(thirdLight);
-    console.log(`user answer length ${userAnswer.length}`);
-    if (userAnswer.length === sequence.length) {
-      checkAnswer(sequence, userAnswer);
-    }
-  }
-});
-
-fourthLight.click(function(e) {
-  e.preventDefault();
-  if (userAnswer.length < sequence.length && userTurn) {
-    userAnswer.push(4);
-    console.log(userAnswer);
-    flashLight(fourthLight);
-    console.log(`user answer length ${userAnswer.length}`);
+  if (
+    userAnswer.length < sequence.length &&
+    userTurn &&
+    $(e.target).is(".light")
+  ) {
+    userAnswer.push(codes[$(e.target).attr("id")]);
+    flashLight($(e.target));
     if (userAnswer.length === sequence.length) {
       checkAnswer(sequence, userAnswer);
     }
