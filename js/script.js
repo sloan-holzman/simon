@@ -15,6 +15,9 @@ let output = $(".sliderValue");
 let defaultTimeLeft = 5;
 let timeLeft = defaultTimeLeft;
 let timer;
+let highScores = [];
+let score = 0;
+
 let codes = {
   light1: 1,
   light2: 2,
@@ -81,8 +84,6 @@ function checkLight(light) {
     case 4:
       flashLight(fourthLight);
       break;
-    default:
-      console.log(light);
   }
 }
 
@@ -112,6 +113,19 @@ function restartGame() {
   slider.val(`${speed}`);
   output.text(`Speed: ${speed}`);
   delay = speeds[`${speed}`];
+  addHighScore();
+}
+
+function addHighScore() {
+  let newScore = new HighScore("sloan", 123);
+  highScores.push(newScore);
+}
+
+class HighScore {
+  constructor(name) {
+    this.name = name.charAt(0).toUpperCase() + name.slice(1);
+    this.score = score;
+  }
 }
 
 function resetVariables() {
@@ -127,8 +141,6 @@ function increaseLevel() {
   level += 1;
   resetVariables();
   increaseSpeed(level);
-  console.log(`level ${level}`);
-  console.log(`sequence ${sequence}`);
   alert(`you got it!!  click start when you are ready to begin level ${level}`);
 }
 
