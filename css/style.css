@@ -1,6 +1,7 @@
 .light {
   width: 100px;
   height: 100px;
+  opacity: 0.2;
 }
 
 #light1 {
