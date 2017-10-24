@@ -15,8 +15,9 @@ let output = $(".sliderValue");
 let defaultTimeLeft = 5;
 let timeLeft = defaultTimeLeft;
 let timer;
-let highScores = [];
-let score = 0;
+// let highScores = [];
+// let name = "Sloan";
+let score = 10;
 
 let codes = {
   light1: 1,
@@ -113,20 +114,32 @@ function restartGame() {
   slider.val(`${speed}`);
   output.text(`Speed: ${speed}`);
   delay = speeds[`${speed}`];
-  addHighScore();
+  //addHighScore();
 }
 
-function addHighScore() {
-  let newScore = new HighScore("sloan", 123);
-  highScores.push(newScore);
-}
-
-class HighScore {
-  constructor(name) {
-    this.name = name.charAt(0).toUpperCase() + name.slice(1);
-    this.score = score;
-  }
-}
+//will need to replace this!!!  also, I haven't really tested if this works
+// function addHighScore() {
+//   let newScore = new HighScore();
+//   if (highScores.length < 10) {
+//     highScores.push(newScore);
+//     highScores.sort(function(a, b) {
+//       return a.score - b.score;
+//     });
+//   } else if (newScore.score > highScores[9].score) {
+//     highScores.pop();
+//     highScores.push(newScore);
+//     highScores.sort(function(a, b) {
+//       return b.score - a.score;
+//     });
+//   }
+// }
+//
+// class HighScore {
+//   constructor() {
+//     this.name = name;
+//     this.score = score;
+//   }
+// }
 
 function resetVariables() {
   userAnswer = [];
