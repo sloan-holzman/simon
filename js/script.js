@@ -8,19 +8,34 @@ let secondLight = $("#light2");
 let thirdLight = $("#light3");
 let fourthLight = $("#light4");
 let startButton = $("#start");
-let delay = 1000;
 let userTurn = false;
 let loopIndex = 0;
+let slider = $("#myRange");
+let output = $(".sliderValue");
 let codes = {
   light1: 1,
   light2: 2,
   light3: 3,
   light4: 4
 };
+let speeds = {
+  1: 1000,
+  2: 900,
+  3: 800,
+  4: 700,
+  5: 600,
+  6: 500,
+  7: 400,
+  8: 300,
+  9: 200
+};
+let defaultSpeed = 5;
+let speed = defaultSpeed;
+let delay = speeds[`${speed}`];
 
 function createSequence(level) {
   if (level === 1) {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       let randomLight = Math.round(Math.random() * 3) + 1;
       sequence.push(randomLight);
     }
@@ -73,15 +88,21 @@ function flashLight(light) {
 function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
     if (answer[i] !== userInput[i]) {
-      level = 1;
-      sequence = [];
-      resetVariables();
-      delay = 1000;
       alert("incorrect answer");
       return;
     }
   }
   increaseLevel();
+}
+
+function restartGame() {
+  level = 1;
+  sequence = [];
+  resetVariables();
+  speed = defaultSpeed;
+  slider.val(`${speed}`);
+  output.text(`Speed: ${speed}`);
+  delay = speeds[`${speed}`];
 }
 
 function resetVariables() {
@@ -99,7 +120,9 @@ function increaseLevel() {
 
 function increaseSpeed(level) {
   if (level === 6 || level === 10 || level === 14) {
-    delay = delay * 0.8;
+    speed += speed;
+    slider.val(`${speed}`);
+    output.text(`Speed: ${speed}`);
   }
 }
 
@@ -124,10 +147,9 @@ startButton.click(function(e) {
   loopSequence(sequence);
 });
 
-var slider = $("#myRange");
-var output = $(".sliderValue");
-
 // Update the current slider value (each time you drag the slider handle)
 slider.change(function() {
-  output.text(parseInt(slider.val()));
+  output.text(`Speed: ${parseInt(slider.val())}`);
+  speed = parseInt(slider.val());
+  delay = speeds[parseInt(slider.val())];
 });

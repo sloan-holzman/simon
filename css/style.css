@@ -4,6 +4,10 @@
   opacity: 0.2;
 }
 
+.sliderValue {
+  text-align: center;
+}
+
 #light1 {
   background-color: green;
 }
@@ -21,7 +25,7 @@
 }
 
 #slidecontainer {
-  width: 100%; /* Width of the outside container */
+  width: 50%; /* Width of the outside container */
 }
 
 /* The slider itself */
