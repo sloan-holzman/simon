@@ -188,6 +188,7 @@ function resetVariables() {
 function increaseLevel() {
   level += 1;
   showTimer();
+  showSlider();
   decidePoints();
   increaseSpeed(level);
   score += points;
@@ -241,6 +242,14 @@ function showTimer() {
   $(".timer").show();
 }
 
+function hideSlider() {
+  $("#slidecontainer").hide();
+}
+
+function showSlider() {
+  $("#slidecontainer").show();
+}
+
 function responseTimer() {
   if ($(".timer option:selected").val() === "on") {
     timeLeft--;
@@ -290,6 +299,7 @@ lights.click(function(e) {
 startButton.click(function(e) {
   e.preventDefault();
   hideTimer();
+  hideSlider();
   createSequence(level);
   loopSequence(sequence);
 });
