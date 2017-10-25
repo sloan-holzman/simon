@@ -66,6 +66,7 @@ let speed = defaultSpeed;
 let delay = speeds[`${speed}`];
 slider.val(`${speed}`);
 sliderDisplay.text(`Speed: ${speed}`);
+displayHighScores();
 
 function createSequence(level) {
   if (level === 1) {
@@ -137,51 +138,34 @@ function checkAnswer(answer, userInput) {
   increaseLevel();
 }
 
-function restartGame() {
-  level = 1;
-  sequence = [];
-  addHighScore();
-  resetVariables();
-  score = 0;
-  speed = defaultSpeed;
-  slider.val(`${speed}`);
-  sliderDisplay.text(`Speed: ${speed}`);
-  delay = speeds[`${speed}`];
-}
-
-//will need to replace this!!!  also, I haven't really tested if this works
+//will need to refactor this...it's too long!
 function addHighScore() {
-  var newScore = new HighScore();
-  console.log(newScore);
   if (localStorage.highScores) {
     var highScores = JSON.parse(localStorage.highScores);
-    console.log("high scores already exists");
   } else {
     var highScores = [];
-    console.log("created new high scores");
   }
   if (highScores.length < 10) {
-    console.log("length less than 10");
-    console.log(`length of high scores: ${highScores.length}`);
-    console.log(`new score: ${newScore.score}`);
+    name = prompt(
+      "Congrats!  You got a new high score.  Please enter your name"
+    );
+    let newScore = new HighScore();
     highScores.push(newScore);
     highScores.sort(function(a, b) {
       return b.score - a.score;
     });
     localStorage.highScores = JSON.stringify(highScores);
-  } else if (newScore.score > highScores[9].score) {
-    console.log("length over 10");
-    console.log(`length of high scores: ${highScores.length}`);
-    console.log(`new score: ${newScore.score}`);
+  } else if (score > highScores[9].score) {
+    name = prompt(
+      "Congrats!  You got a new high score.  Please enter your name"
+    );
+    let newScore = new HighScore();
     highScores.pop();
     highScores.push(newScore);
     highScores.sort(function(a, b) {
       return b.score - a.score;
     });
     localStorage.highScores = JSON.stringify(highScores);
-  } else {
-    console.log(`new score: ${newScore.score}`);
-    highScores[9].score;
   }
 }
 
@@ -198,7 +182,6 @@ function resetVariables() {
   loopIndex = 0;
   timeLeft = defaultTimeLeft;
   stopTimer();
-  updateScoreDisplay();
   $(".countdown").text(``);
   levelDisplay.text(`Level ${level}`);
 }
@@ -209,9 +192,23 @@ function increaseLevel() {
   increaseSpeed(level);
   score += points;
   resetVariables();
-  console.log(`points from increase level: ${points}`);
-  console.log(`score from increase level: ${score}`);
+  updateScoreDisplay();
   alert(`you got it!!  click start when you are ready to begin level ${level}`);
+}
+
+function restartGame() {
+  level = 1;
+  sequence = [];
+  addHighScore();
+  resetVariables();
+  score = 0;
+  speed = defaultSpeed;
+  slider.val(`${speed}`);
+  sliderDisplay.text(`Speed: ${speed}`);
+  delay = speeds[`${speed}`];
+  updateScoreDisplay();
+  $(".scoreList").empty();
+  displayHighScores();
 }
 
 function increaseSpeed(level) {
@@ -234,7 +231,6 @@ function decidePoints() {
     timerBonus = 1;
   }
   points = basePoints[`${speed}`] * reverseBonus * timerBonus;
-  console.log(`points from decide points: ${points}`);
 }
 
 function hideTimer() {
@@ -262,6 +258,17 @@ function stopTimer() {
 
 function updateScoreDisplay() {
   scoreDisplay.text(`Score: ${score}`);
+}
+
+function displayHighScores() {
+  if (localStorage.highScores) {
+    var highScores = JSON.parse(localStorage.highScores);
+    for (var j = 0; j < highScores.length; j++) {
+      $(".scoreList").append(
+        "<li>" + highScores[j].score + " - " + highScores[j].name + "</li>"
+      );
+    }
+  }
 }
 
 lights.click(function(e) {
