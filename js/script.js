@@ -11,7 +11,8 @@ let startButton = $("#start");
 let userTurn = false;
 let loopIndex = 0;
 let slider = $("#myRange");
-let output = $(".sliderValue");
+let sliderDisplay = $(".sliderValue");
+let scoreDisplay = $(".scoreDisplay");
 let defaultTimeLeft = 5;
 let timeLeft = defaultTimeLeft;
 let timer;
@@ -53,11 +54,19 @@ let basePoints = {
   9: 9
 };
 
+// const array = {
+//   "1": {
+//     speed: 1000,
+//     points: 1
+//   }
+// }
+// array[1]
+
 let defaultSpeed = 5;
 let speed = defaultSpeed;
 let delay = speeds[`${speed}`];
 slider.val(`${speed}`);
-output.text(`Speed: ${speed}`);
+sliderDisplay.text(`Speed: ${speed}`);
 
 function createSequence(level) {
   if (level === 1) {
@@ -133,9 +142,10 @@ function restartGame() {
   level = 1;
   sequence = [];
   resetVariables();
+  score = 0;
   speed = defaultSpeed;
   slider.val(`${speed}`);
-  output.text(`Speed: ${speed}`);
+  sliderDisplay.text(`Speed: ${speed}`);
   delay = speeds[`${speed}`];
   //addHighScore();
 }
@@ -170,18 +180,17 @@ function resetVariables() {
   loopIndex = 0;
   timeLeft = defaultTimeLeft;
   stopTimer();
-  points = 0;
-  reverseBonus = 1;
-  timerBonus = 1;
+  updateScoreDisplay();
   $(".countdown").text(``);
   levelDisplay.text(`Level ${level}`);
 }
 function increaseLevel() {
   level += 1;
-  resetVariables();
-  increaseSpeed(level);
+  showTimer();
   decidePoints();
+  increaseSpeed(level);
   score += points;
+  resetVariables();
   console.log(`points from increase level: ${points}`);
   console.log(`score from increase level: ${score}`);
   alert(`you got it!!  click start when you are ready to begin level ${level}`);
@@ -191,7 +200,7 @@ function increaseSpeed(level) {
   if (level === 6 || level === 10 || level === 14) {
     speed = Math.min(9, speed + 1);
     slider.val(`${speed}`);
-    output.text(`Speed: ${speed}`);
+    sliderDisplay.text(`Speed: ${speed}`);
   }
 }
 
@@ -208,6 +217,34 @@ function decidePoints() {
   }
   points = basePoints[`${speed}`] * reverseBonus * timerBonus;
   console.log(`points from decide points: ${points}`);
+}
+
+function hideTimer() {
+  $(".timer").hide();
+}
+
+function showTimer() {
+  $(".timer").show();
+}
+
+function responseTimer() {
+  if ($(".timer option:selected").val() === "on") {
+    timeLeft--;
+    $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
+    if (timeLeft <= 0) {
+      alert("ran out of time!  you lose");
+      restartGame();
+    }
+  }
+}
+
+function stopTimer() {
+  clearInterval(timer);
+}
+
+function updateScoreDisplay() {
+  scoreDisplay.text(`Score: ${score}`);
+  console.log(`update score display: ${score}`);
 }
 
 lights.click(function(e) {
@@ -228,28 +265,14 @@ lights.click(function(e) {
 
 startButton.click(function(e) {
   e.preventDefault();
+  hideTimer();
   createSequence(level);
   loopSequence(sequence);
 });
 
 // Update the current slider value (each time you drag the slider handle)
 slider.change(function() {
-  output.text(`Speed: ${parseInt(slider.val())}`);
+  sliderDisplay.text(`Speed: ${parseInt(slider.val())}`);
   speed = parseInt(slider.val());
   delay = speeds[parseInt(slider.val())];
 });
-
-function responseTimer() {
-  if ($(".timer option:selected").val() === "on") {
-    timeLeft--;
-    $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
-    if (timeLeft <= 0) {
-      alert("ran out of time!  you lose");
-      restartGame();
-    }
-  }
-}
-
-function stopTimer() {
-  clearInterval(timer);
-}
