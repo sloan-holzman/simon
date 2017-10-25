@@ -16,8 +16,7 @@ let scoreDisplay = $(".scoreDisplay");
 let defaultTimeLeft = 5;
 let timeLeft = defaultTimeLeft;
 let timer;
-// let highScores = [];
-// let name = "Sloan";
+let name = "Sloan";
 let score = 0;
 let reverseBonus = 1;
 let timerBonus = 1;
@@ -141,38 +140,57 @@ function checkAnswer(answer, userInput) {
 function restartGame() {
   level = 1;
   sequence = [];
+  addHighScore();
   resetVariables();
   score = 0;
   speed = defaultSpeed;
   slider.val(`${speed}`);
   sliderDisplay.text(`Speed: ${speed}`);
   delay = speeds[`${speed}`];
-  //addHighScore();
 }
 
 //will need to replace this!!!  also, I haven't really tested if this works
-// function addHighScore() {
-//   let newScore = new HighScore();
-//   if (highScores.length < 10) {
-//     highScores.push(newScore);
-//     highScores.sort(function(a, b) {
-//       return a.score - b.score;
-//     });
-//   } else if (newScore.score > highScores[9].score) {
-//     highScores.pop();
-//     highScores.push(newScore);
-//     highScores.sort(function(a, b) {
-//       return b.score - a.score;
-//     });
-//   }
-// }
-//
-// class HighScore {
-//   constructor() {
-//     this.name = name;
-//     this.score = score;
-//   }
-// }
+function addHighScore() {
+  var newScore = new HighScore();
+  console.log(newScore);
+  if (localStorage.highScores) {
+    var highScores = JSON.parse(localStorage.highScores);
+    console.log("high scores already exists");
+  } else {
+    var highScores = [];
+    console.log("created new high scores");
+  }
+  if (highScores.length < 10) {
+    console.log("length less than 10");
+    console.log(`length of high scores: ${highScores.length}`);
+    console.log(`new score: ${newScore.score}`);
+    highScores.push(newScore);
+    highScores.sort(function(a, b) {
+      return b.score - a.score;
+    });
+    localStorage.highScores = JSON.stringify(highScores);
+  } else if (newScore.score > highScores[9].score) {
+    console.log("length over 10");
+    console.log(`length of high scores: ${highScores.length}`);
+    console.log(`new score: ${newScore.score}`);
+    highScores.pop();
+    highScores.push(newScore);
+    highScores.sort(function(a, b) {
+      return b.score - a.score;
+    });
+    localStorage.highScores = JSON.stringify(highScores);
+  } else {
+    console.log(`new score: ${newScore.score}`);
+    highScores[9].score;
+  }
+}
+
+class HighScore {
+  constructor() {
+    this.name = name;
+    this.score = score;
+  }
+}
 
 function resetVariables() {
   userAnswer = [];
@@ -244,7 +262,6 @@ function stopTimer() {
 
 function updateScoreDisplay() {
   scoreDisplay.text(`Score: ${score}`);
-  console.log(`update score display: ${score}`);
 }
 
 lights.click(function(e) {
