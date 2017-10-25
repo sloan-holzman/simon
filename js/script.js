@@ -12,7 +12,7 @@ let userTurn = false;
 let loopIndex = 0;
 let slider = $("#myRange");
 let output = $(".sliderValue");
-let defaultTimeLeft = 15;
+let defaultTimeLeft = 5;
 let timeLeft = defaultTimeLeft;
 let timer;
 // let highScores = [];
@@ -95,7 +95,6 @@ function flashLight(light) {
   }, delay / 2);
 }
 
-//need to fix this!!!!!
 function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
     if ($(".order option:selected").val() === "reverse") {
@@ -201,11 +200,13 @@ slider.change(function() {
 });
 
 function responseTimer() {
-  timeLeft--;
-  $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
-  if (timeLeft <= 0) {
-    alert("ran out of time!  you lose");
-    restartGame();
+  if ($(".timer option:selected").val() === "on") {
+    timeLeft--;
+    $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
+    if (timeLeft <= 0) {
+      alert("ran out of time!  you lose");
+      restartGame();
+    }
   }
 }
 
