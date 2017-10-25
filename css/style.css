@@ -1,7 +1,70 @@
+.button {
+  margin: 25px 0px 0px 0px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 210px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  border-radius: 12px;
+  opacity: .5
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button:hover {
+  opacity: 1;
+  right: 0;
+}
+
+h1 {
+  letter-spacing: 2.5px;
+  font-size: 50px;
+  margin: 2px auto 0px auto;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 0px auto 0px auto;
+  font-weight: 100;
+  font-style: italic;
+}
+
 .light {
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   opacity: 0.2;
+}
+
+.lights {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .sliderValue {
@@ -10,18 +73,23 @@
 
 #light1 {
   background-color: green;
+  border-top-left-radius: 100px;
 }
 
 #light2 {
   background-color: red;
+  border-top-right-radius: 100px;
 }
 
 #light3 {
   background-color: yellow;
+  border-bottom-left-radius: 100px;
 }
 
 #light4 {
   background-color: blue;
+  border-bottom-right-radius: 100px;
+
 }
 
 #slidecontainer {
@@ -61,4 +129,19 @@
   height: 25px; /* Slider handle height */
   background: #4caf50; /* Green background */
   cursor: pointer; /* Cursor on hover */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-family: "Anton", sans-serif;
+  background-color: #C0C0C0;
+
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
