@@ -17,7 +17,10 @@ let timeLeft = defaultTimeLeft;
 let timer;
 // let highScores = [];
 // let name = "Sloan";
-let score = 10;
+let score = 0;
+let reverseBonus = 1;
+let timerBonus = 1;
+let points = 0;
 
 let codes = {
   light1: 1,
@@ -36,6 +39,20 @@ let speeds = {
   8: 300,
   9: 200
 };
+
+//clean this up later to combine speeds and points into one object/array structure
+let basePoints = {
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9
+};
+
 let defaultSpeed = 5;
 let speed = defaultSpeed;
 let delay = speeds[`${speed}`];
@@ -69,6 +86,7 @@ function loopSequence(sequence) {
     }
     loopSequence(sequence);
   }, delay);
+  console.log(sequence);
 }
 
 function checkLight(light) {
@@ -152,6 +170,9 @@ function resetVariables() {
   loopIndex = 0;
   timeLeft = defaultTimeLeft;
   stopTimer();
+  points = 0;
+  reverseBonus = 1;
+  timerBonus = 1;
   $(".countdown").text(``);
   levelDisplay.text(`Level ${level}`);
 }
@@ -159,15 +180,34 @@ function increaseLevel() {
   level += 1;
   resetVariables();
   increaseSpeed(level);
+  decidePoints();
+  score += points;
+  console.log(`points from increase level: ${points}`);
+  console.log(`score from increase level: ${score}`);
   alert(`you got it!!  click start when you are ready to begin level ${level}`);
 }
 
 function increaseSpeed(level) {
   if (level === 6 || level === 10 || level === 14) {
-    speed += speed;
+    speed = Math.min(9, speed + 1);
     slider.val(`${speed}`);
     output.text(`Speed: ${speed}`);
   }
+}
+
+function decidePoints() {
+  if ($(".order option:selected").val() === "reverse") {
+    reverseBonus = 1.5;
+  } else {
+    reverseBonus = 1;
+  }
+  if ($(".timer option:selected").val() === "on") {
+    timerBonus = 1.5;
+  } else {
+    timerBonus = 1;
+  }
+  points = basePoints[`${speed}`] * reverseBonus * timerBonus;
+  console.log(`points from decide points: ${points}`);
 }
 
 lights.click(function(e) {
