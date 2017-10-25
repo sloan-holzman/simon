@@ -1,7 +1,7 @@
 let level = 1;
 let sequence = [];
 let userAnswer = [];
-let levelDisplay = $(".level");
+let levelDisplay = $("#level");
 let lights = $(".lights");
 let firstLight = $("#light1");
 let secondLight = $("#light2");
@@ -11,9 +11,10 @@ let startButton = $("#start");
 let userTurn = false;
 let loopIndex = 0;
 let slider = $("#myRange");
-let sliderDisplay = $(".sliderValue");
-let scoreDisplay = $(".scoreDisplay");
-let defaultTimeLeft = 5;
+let sliderDisplay = $("#sliderValue");
+let scoreDisplay = $("#scoreDisplay");
+let highestScore = $("#highScore");
+let defaultTimeLeft = 10;
 let timeLeft = defaultTimeLeft;
 let timer;
 let name = "Sloan";
@@ -124,7 +125,7 @@ function flashLight(light) {
 
 function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
-    if ($(".order option:selected").val() === "reverse") {
+    if ($("#answerOrder option:selected").val() === "reverse") {
       var userInputIndex = userInput.length - i - 1;
     } else {
       var userInputIndex = i;
@@ -182,13 +183,12 @@ function resetVariables() {
   loopIndex = 0;
   timeLeft = defaultTimeLeft;
   stopTimer();
+  showElements();
   $(".countdown").text(``);
   levelDisplay.text(`Level ${level}`);
 }
 function increaseLevel() {
   level += 1;
-  showTimer();
-  showSlider();
   decidePoints();
   increaseSpeed(level);
   score += points;
@@ -221,12 +221,12 @@ function increaseSpeed(level) {
 }
 
 function decidePoints() {
-  if ($(".order option:selected").val() === "reverse") {
+  if ($("#answerOrder option:selected").val() === "reverse") {
     reverseBonus = 1.5;
   } else {
     reverseBonus = 1;
   }
-  if ($(".timer option:selected").val() === "on") {
+  if ($("#timer option:selected").val() === "on") {
     timerBonus = 1.5;
   } else {
     timerBonus = 1;
@@ -234,26 +234,28 @@ function decidePoints() {
   points = basePoints[`${speed}`] * reverseBonus * timerBonus;
 }
 
-function hideTimer() {
-  $(".timer").hide();
-}
-
-function showTimer() {
-  $(".timer").show();
-}
-
-function hideSlider() {
+function hideElements() {
+  $("#timer").hide();
   $("#slidecontainer").hide();
+  $("#answerOrder").hide();
+  $(".button").hide();
 }
 
-function showSlider() {
+function showElements() {
+  $("#timer").show();
   $("#slidecontainer").show();
+  $("#answerOrder").show();
+  $(".button").show();
 }
 
 function responseTimer() {
-  if ($(".timer option:selected").val() === "on") {
+  if ($("#timer option:selected").val() === "on") {
+    console.log("timer selected");
     timeLeft--;
     $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
+    if (timeLeft <= defaultTimeLeft / 2) {
+      $(".countdown").css("color", "red");
+    }
     if (timeLeft <= 0) {
       alert("ran out of time!  you lose");
       restartGame();
@@ -266,7 +268,7 @@ function stopTimer() {
 }
 
 function updateScoreDisplay() {
-  scoreDisplay.text(`Score: ${score}`);
+  scoreDisplay.text(`Score ${score}`);
 }
 
 function displayHighScores() {
@@ -279,6 +281,15 @@ function displayHighScores() {
     }
   }
 }
+
+function displayHighestScore() {
+  if (localStorage.highScores) {
+    var highScores = JSON.parse(localStorage.highScores);
+    highestScore.text(`High Score ${highScores[0].score}`);
+  }
+}
+
+displayHighestScore();
 
 lights.click(function(e) {
   e.preventDefault();
@@ -298,8 +309,7 @@ lights.click(function(e) {
 
 startButton.click(function(e) {
   e.preventDefault();
-  hideTimer();
-  hideSlider();
+  hideElements();
   createSequence(level);
   loopSequence(sequence);
 });

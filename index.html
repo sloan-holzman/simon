@@ -13,56 +13,67 @@
       <h1>SIMON</h1>
     </header>
     <content>
-    <div class="level">Level 1</div>
-    <div class="lights">
-      <div class="lightRow">
-        <div class="light" id="light1"></div>
-        <div class="light" id="light3"></div>
+      <section id="gameBoard">
+        <div class="lights">
+          <div class="lightRow">
+            <div class="light" id="light1"></div>
+            <div class="light" id="light3"></div>
+          </div>
+          <div class="lightRow">
+            <div class="light" id="light2"></div>
+            <div class="light" id="light4"></div>
+          </div>
+        </div>
+      </section>
+      <section id="rightSide">
+        <div class="rightInfo" id="topInfo">
+          <div class="stats" id="level">Level 1</div>
+          <div class="stats" id="scoreDisplay">Score 0</div>
+          <div class="stats" id="highScore">High Score 0</div>
+        </div>
+        <div class="rightInfo" id="bottomInfo">
+          <select single class="dropdown" id="answerOrder">
+            <option value="same">Answer in same order</option>
+            <option value="reverse">Answer in reverse order</option>
+          </select>
+          <select single class="dropdown" id="timer">
+            <option value="on">Timer on</option>
+            <option value="off">Timer off</option>
+          </select>
+          <div id="slidecontainer">
+            <button class="button" id="sliderValue">Speed: 5</button>
+            <input type="range" min="1" max="9" value="5" class="slider" id="myRange">
+            <!-- <div class="sliderValue">Speed: 5</div> -->
+          </div>
+        </div>
+      </section>
+      <!-- <div class="Instructions">
+        <h2>Instructions</h2>
+        <h3>Rules</h3>
+        <p>When you click start, the computer will flash a pattern</p>
+        <p>The player must then click on the lights in the same pattern as the computer</p>
+        <p>The pattern will increase by one more light for each level</p>
+        <p>If the timer is on, player must start entering the pattern before the timer expires</p>
+        <p>If the toggle is set to 'Answer in reverse order', player must enter the pattern backwards</p>
+        <p>The speed automatically increases by 1 at level 6, 10, and 14</p>
+        <p>Failure to enter the correct pattern (or begin entering before timer expires) will result in a loss</p>
+        <h3>Scoring</h3>
+        <p>Each level of speed is worth one point per level</p>
+        <p>(e.g. if you beat a level on speed 5, you get 5 points)</p>
+        <p>If you use the timer, your points are multiplied by 1.5X</p>
+        <p>If you answer the pattern in reverse, your points are multiplied by 1.5X again</p>
       </div>
-      <div class="lightRow">
-        <div class="light" id="light2"></div>
-        <div class="light" id="light4"></div>
-      </div>
-    </div>
-    <form id="form">
-      <button class="button" id="start"><span>Start</span></button>
-    </form>
-    <p class="countdown"></p>
-    <select single class="timer">
-      <option value="on">Timer on</option>
-      <option value="off">Timer off</option>
-    </select>
-    <div class="scoreDisplay">Score: 0</div>
-    <!-- <div class="Instructions">
-      <h2>Instructions</h2>
-      <h3>Rules</h3>
-      <p>When you click start, the computer will flash a pattern</p>
-      <p>The player must then click on the lights in the same pattern as the computer</p>
-      <p>The pattern will increase by one more light for each level</p>
-      <p>If the timer is on, player must start entering the pattern before the timer expires</p>
-      <p>If the toggle is set to 'Answer in reverse order', player must enter the pattern backwards</p>
-      <p>The speed automatically increases by 1 at level 6, 10, and 14</p>
-      <p>Failure to enter the correct pattern (or begin entering before timer expires) will result in a loss</p>
-      <h3>Scoring</h3>
-      <p>Each level of speed is worth one point per level</p>
-      <p>(e.g. if you beat a level on speed 5, you get 5 points)</p>
-      <p>If you use the timer, your points are multiplied by 1.5X</p>
-      <p>If you answer the pattern in reverse, your points are multiplied by 1.5X again</p>
-    </div>
-    <div class="highScores">
-      <h3>High scores</h3>
-      <ol class="scoreList">
-      <ol>
-    </div> -->
+      <div class="highScores">
+        <h3>High scores</h3>
+        <ol class="scoreList">
+        <ol>
+      </div> -->
+    </content>
     <footer>
-      <select single class="order">
-        <option value="same">Answer in same order</option>
-        <option value="reverse">Answer in reverse order</option>
-      </select>
-      <div id="slidecontainer">
-        <input type="range" min="1" max="9" value="5" class="slider" id="myRange">
-        <div class="sliderValue">Speed: 5</div>
-      </div>
+      <form id="form">
+        <button class="button" id="start"><span>Start</span></button>
+      </form>
+      <p class="countdown"></p>
     </footer>
   </body>
 </html>
