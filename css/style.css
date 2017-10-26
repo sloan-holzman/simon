@@ -1,53 +1,48 @@
-html,
 body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0 10px 0 10px;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
   font-family: "Anton", sans-serif;
   background-color: #c0c0c0;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-  flex: 0 0 auto;
-  margin: 0 10% 0 10%;
+  flex-grow: 1;
 }
 
-content {
-  flex: 1 1 auto;
-  position: relative; /* need this to position inner content */
-  overflow-y: scroll;
-  height: 100%;
+main {
+  flex-grow: 12;
   display: flex;
   flex-direction: row;
-  margin: 0 10% 0 10%;
 }
 
 footer {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 0px auto 10px auto;
+  background-color: yellow;
+  flex-grow: 1;
 }
 
 #gameBoard {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-bottom;
+  background-color: orange;
+  width: 60%;
+  margin: 0 0 0 10%;
 }
 
 #rightSide,
 .rightInfo {
+  /*display: flex;
+  flex-direction: column;*/
+  width: 20%;
+  background-color: green;
+  margin: 0 10% 0 0;
   display: flex;
   flex-direction: column;
 }
 
 .rightInfo {
-  align-items: flex-start;
   justify-content: center;
-  height: 50%;
+  width: 100%;
   text-align: left;
   color: #b20000;
 }
@@ -55,6 +50,12 @@ footer {
 #bottomInfo {
   color: black;
   font-size: 25px;
+  height: 50%;
+  flex-grow: 1;
+}
+
+#topInfo {
+  flex-grow: 1;
 }
 
 .optionRow {
@@ -63,8 +64,8 @@ footer {
 }
 
 .switchLabel {
-  margin: 5px 50% 5px 20px;
-  width: 50%;
+  margin: 5px 20px 5px 20px;
+  width: 100%;
 }
 
 select.dropdown {
@@ -85,25 +86,6 @@ select.dropdown {
   height: 50px;
 }
 
-#sliderValue {
-  background-color: #c0c0c0;
-  color: #555;
-  font-size: inherit;
-  margin: 5px 20px 5px 20px;
-  overflow: hidden;
-  padding: 5px 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 300px;
-  text-align: center;
-  border-radius: 12px;
-  border-color: rbg(166, 166, 166);
-  border-style: solid;
-  border-width: 1px;
-  height: 50px;
-  text-align: left;
-}
-
 ::-webkit-scrollbar {
   width: 0px; /* remove scrollbar space */
   background: transparent; /* make scrollbar invisible */
@@ -115,7 +97,7 @@ select.dropdown {
 }
 
 .button {
-  margin: 25px 0px 0px 0px;
+  margin: 1% 0px 0px 0px;
   background-color: #4caf50;
   border: none;
   color: white;
@@ -161,7 +143,7 @@ select.dropdown {
 h1 {
   letter-spacing: 2.5px;
   font-size: 50px;
-  margin: 2px 31% 0px auto;
+  margin: 0px;
 }
 
 h2 {
@@ -171,16 +153,30 @@ h2 {
   font-style: italic;
 }
 
+.lights {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
 .light {
-  width: 350px;
-  height: 250px;
+  width: 75%;
+  height: 75%;
   opacity: 0.2;
 }
 
-.lights {
+.lightColumn {
+  flex-grow: 1;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+}
+
+#column1 {
+  align-items: flex-end;
+}
+
+#column2 {
+  align-items: flex-start;
 }
 
 .sliderValue {
@@ -211,40 +207,39 @@ h2 {
   width: 100%; /* Width of the outside container */
 }
 
-/* The slider itself */
 .slider {
-  -webkit-appearance: none; /* Override default CSS styles */
-  appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  -webkit-appearance: none;
+  width: 82px;
+  height: 44px;
+  border-radius: 20px;
+  background: #f1f1f1;
+  outline: none;
+  -webkit-transition: 0.2s;
   transition: opacity 0.2s;
 }
 
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 44px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+  opacity: 0.5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* The slider handle (use webkit (Chrome, Opera, Safari, Edge) and moz (Firefox) to override default look) */
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #4caf50; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+.slider::-webkit-slider-thumb:hover {
+  opacity: 1;
 }
 
 .slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #4caf50; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  opacity: 0.5;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
 }
 
 /*everything below is for the switch*/

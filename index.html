@@ -12,14 +12,14 @@
     <header>
       <h1>SIMON</h1>
     </header>
-    <content>
+    <main>
       <section id="gameBoard">
         <div class="lights">
-          <div class="lightRow">
+          <div class="lightColumn" id="column1">
             <div class="light" id="light1"></div>
             <div class="light" id="light3"></div>
           </div>
-          <div class="lightRow">
+          <div class="lightColumn" id="column2">
             <div class="light" id="light2"></div>
             <div class="light" id="light4"></div>
           </div>
@@ -40,7 +40,30 @@
             <option value="on">Timer on</option>
             <option value="off">Timer off</option>
           </select> -->
-          <div class="optionRow">
+
+          <table style="width:100%" class="optionRow">
+          <tr>
+            <td><div class="switchLabel">Reverse</div></td>
+            <td><div class="switch">
+              <input id="reverseSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
+              <label for="reverseSwitch"></label>
+            </div></td>
+          </tr>
+          <tr>
+            <td><div class="switchLabel">Timer</div></td>
+            <td><div class="switch">
+              <input id="timerSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
+              <label for="timerSwitch"></label>
+            </div></td>
+          </tr>
+          <tr>
+            <td>          <div id="slidecontainer">
+                        <div class="switchLabel" id="sliderValue">Speed: 5</div>
+                      </div></td>
+            <td><input type="range" min="1" max="9" value="5" class="slider" id="myRange"></td>
+          </tr>
+        </table>
+          <!-- <div class="optionRow">
             <div class="switchLabel">Reverse</div>
             <div class="switch">
               <input id="reverseSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
@@ -55,34 +78,11 @@
             </div>
           </div>
           <div id="slidecontainer">
-            <button class="button" id="sliderValue">Speed: 5</button>
-            <input type="range" min="1" max="9" value="5" class="slider" id="myRange">
-            <!-- <div class="sliderValue">Speed: 5</div> -->
-          </div>
+            <div class="switchLabel" id="sliderValue">Speed: 5</div>
+          </div> -->
         </div>
       </section>
-      <!-- <div class="Instructions">
-        <h2>Instructions</h2>
-        <h3>Rules</h3>
-        <p>When you click start, the computer will flash a pattern</p>
-        <p>The player must then click on the lights in the same pattern as the computer</p>
-        <p>The pattern will increase by one more light for each level</p>
-        <p>If the timer is on, player must start entering the pattern before the timer expires</p>
-        <p>If the toggle is set to 'Answer in reverse order', player must enter the pattern backwards</p>
-        <p>The speed automatically increases by 1 at level 6, 10, and 14</p>
-        <p>Failure to enter the correct pattern (or begin entering before timer expires) will result in a loss</p>
-        <h3>Scoring</h3>
-        <p>Each level of speed is worth one point per level</p>
-        <p>(e.g. if you beat a level on speed 5, you get 5 points)</p>
-        <p>If you use the timer, your points are multiplied by 1.5X</p>
-        <p>If you answer the pattern in reverse, your points are multiplied by 1.5X again</p>
-      </div>
-      <div class="highScores">
-        <h3>High scores</h3>
-        <ol class="scoreList">
-        <ol>
-      </div> -->
-    </content>
+    </main>
     <footer>
       <form id="form">
         <button class="button" id="start"><span>Start</span></button>
