@@ -31,42 +31,74 @@ let codes = {
   light3: 3,
   light4: 4
 };
-let speeds = {
-  1: 1000,
-  2: 900,
-  3: 800,
-  4: 700,
-  5: 600,
-  6: 500,
-  7: 400,
-  8: 300,
-  9: 200
-};
+// let speeds = {
+//   1: 1000,
+//   2: 900,
+//   3: 800,
+//   4: 700,
+//   5: 600,
+//   6: 500,
+//   7: 400,
+//   8: 300,
+//   9: 200
+// };
+//
+// //clean this up later to combine speeds and points into one object/array structure
+// let basePoints = {
+//   1: 1,
+//   2: 2,
+//   3: 3,
+//   4: 4,
+//   5: 5,
+//   6: 6,
+//   7: 7,
+//   8: 8,
+//   9: 9
+// };
 
-//clean this up later to combine speeds and points into one object/array structure
-let basePoints = {
-  1: 1,
-  2: 2,
-  3: 3,
-  4: 4,
-  5: 5,
-  6: 6,
-  7: 7,
-  8: 8,
-  9: 9
+const speedValues = {
+  "1": {
+    milliseconds: 1000,
+    points: 1
+  },
+  "2": {
+    milliseconds: 900,
+    points: 2
+  },
+  "3": {
+    milliseconds: 800,
+    points: 3
+  },
+  "4": {
+    milliseconds: 700,
+    points: 4
+  },
+  "5": {
+    milliseconds: 600,
+    points: 5
+  },
+  "6": {
+    milliseconds: 500,
+    points: 6
+  },
+  "7": {
+    milliseconds: 400,
+    points: 7
+  },
+  "8": {
+    milliseconds: 300,
+    points: 8
+  },
+  "9": {
+    milliseconds: 200,
+    points: 9
+  }
 };
-
-// const array = {
-//   "1": {
-//     speed: 1000,
-//     points: 1
-//   }
-// }
-// array[1]
 
 let defaultSpeed = 5;
 let speed = defaultSpeed;
-let delay = speeds[`${speed}`];
+// let delay = speeds[`${speed}`];
+let delay = speedValues[`${speed}`].milliseconds;
 slider.val(`${speed}`);
 sliderDisplay.text(`Speed: ${speed}`);
 $(".highScoreTable").hide();
@@ -227,7 +259,8 @@ function restartGame() {
   speed = defaultSpeed;
   slider.val(`${speed}`);
   sliderDisplay.text(`Speed: ${speed}`);
-  delay = speeds[`${speed}`];
+  // delay = speeds[`${speed}`];
+  delay = speedValues[`${speed}`].milliseconds;
   updateScoreDisplay();
   $("span").text("Start");
   $(".scoreList").empty();
@@ -253,19 +286,16 @@ function increaseSpeed(level) {
 function decidePoints() {
   if ($("#reverseSwitch").is(":checked")) {
     reverseBonus = 1.5;
-    console.log("reverse");
   } else {
     reverseBonus = 1;
-    console.log("normal");
   }
   if ($("#timerSwitch").is(":checked")) {
     timerBonus = 1.5;
-    console.log("checked");
   } else {
     timerBonus = 1;
-    console.log("not checked");
   }
-  points = basePoints[`${speed}`] * reverseBonus * timerBonus;
+  // points = basePoints[`${speed}`] * reverseBonus * timerBonus;
+  points = speedValues[`${speed}`].points * reverseBonus * timerBonus;
 }
 
 function hideElements() {
@@ -280,7 +310,6 @@ function showElements() {
 
 function responseTimer() {
   if ($("#timerSwitch").is(":checked")) {
-    console.log("timer selected");
     timeLeft--;
     $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
     if (timeLeft <= defaultTimeLeft / 2) {
@@ -329,7 +358,6 @@ function showHighScores() {
   $(".scoreTable").append(tr);
   var highScores = JSON.parse(localStorage.highScores);
   for (let k = 0; k < highScores.length; k++) {
-    console.log(highScores[k]);
     tr = document.createElement("tr");
     td1 = document.createElement("td");
     tr.appendChild(td1);
@@ -385,5 +413,6 @@ startButton.click(function(e) {
 slider.change(function() {
   sliderDisplay.text(`Speed: ${parseInt(slider.val())}`);
   speed = parseInt(slider.val());
-  delay = speeds[parseInt(slider.val())];
+  //delay = speeds[parseInt(slider.val())];
+  delay = speedValues[parseInt(slider.val())].milliseconds;
 });
