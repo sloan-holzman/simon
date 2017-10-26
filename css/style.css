@@ -9,26 +9,24 @@ body {
 }
 
 header {
-  flex-grow: 0.6;
+  min-height: 15%;
 }
 
 main {
-  flex-grow: 12;
+  flex-grow: 1;
   display: flex;
   flex-direction: row;
 }
 
 footer {
-  background-color: yellow;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 20%;
 }
 
 #gameBoard {
-  background-color: orange;
-  width: 60%;
+  width: 50%;
   margin: 0 0 0 10%;
 }
 
@@ -36,21 +34,19 @@ footer {
 .rightInfo {
   /*display: flex;
   flex-direction: column;*/
-  width: 20%;
-  background-color: green;
+  width: 30%;
   margin: 0 10% 0 0;
   display: flex;
   flex-direction: column;
 }
 
 #mainHeader {
-  width: 60%;
+  width: 50%;
   margin: 0 0 0 10%;
 }
 
 #rightHeader {
-  width: 20%;
-  background-color: purple;
+  width: 30%;
   margin: 0 10% 0 0;
 }
 
@@ -75,6 +71,11 @@ footer {
 .optionRow {
   display: flex;
   flex-direction: row;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 .switchLabel {
@@ -118,13 +119,25 @@ select.dropdown {
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 15px 210px;
+  padding: 15px 150px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 24px;
+  font-size: 30px;
   border-radius: 12px;
   opacity: 0.5;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    right: 0;
+    padding: 15px 180px;
+  }
 }
 
 .button span {
@@ -154,7 +167,9 @@ select.dropdown {
 
 .button:hover {
   opacity: 1;
-  right: 0;
+  padding: 15px 180px;
+  transition: 1s;
+  animation-play-state: paused;
 }
 
 #titleText {
@@ -177,8 +192,8 @@ h2 {
 }
 
 .light {
-  width: 75%;
-  height: 75%;
+  width: 100%;
+  height: 100%;
   opacity: 0.2;
 }
 
@@ -308,4 +323,32 @@ input.cmn-toggle-round:checked + label:before {
 }
 input.cmn-toggle-round:checked + label:after {
   margin-left: 40px;
+}
+
+.box {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  background: #c0c0c0;
+  padding: 5px;
+  border: 1px solid black;
+  width: 300px;
+  font-size: 14px;
+  left: 40%;
+}
+
+#reverse:hover + #reverseBox {
+  display: block;
+  top: 50%;
+}
+
+#timer:hover + #timerBox {
+  display: block;
+  top: 57%;
+}
+
+#sliderValue:hover + #speedBox {
+  display: block;
+  top: 65%;
 }

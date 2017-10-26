@@ -22,6 +22,7 @@ let score = 0;
 let reverseBonus = 1;
 let timerBonus = 1;
 let points = 0;
+let introSequence = [1, 2, 4, 3];
 
 let codes = {
   light1: 1,
@@ -191,6 +192,9 @@ function resetVariables() {
 }
 
 function increaseLevel() {
+  if (level === 1) {
+    $("span").text("Next Level");
+  }
   level += 1;
   decidePoints();
   increaseSpeed(level);
@@ -213,6 +217,7 @@ function restartGame() {
   sliderDisplay.text(`Speed: ${speed}`);
   delay = speeds[`${speed}`];
   updateScoreDisplay();
+  $("span").text("Start");
   $(".scoreList").empty();
   displayHighScores();
   setTimeout(function() {
