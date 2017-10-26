@@ -17,7 +17,7 @@ let highestScore = $("#highScore");
 let defaultTimeLeft = 10;
 let timeLeft = defaultTimeLeft;
 let timer;
-let name = "Sloan";
+let name = "HillaryC";
 let score = 0;
 let reverseBonus = 1;
 let timerBonus = 1;
@@ -68,7 +68,7 @@ let speed = defaultSpeed;
 let delay = speeds[`${speed}`];
 slider.val(`${speed}`);
 sliderDisplay.text(`Speed: ${speed}`);
-displayHighScores();
+$(".highScoreTable").hide();
 
 function createSequence(level) {
   if (level === 1) {
@@ -133,7 +133,7 @@ function checkAnswer(answer, userInput) {
     }
     if (answer[i] !== userInput[userInputIndex]) {
       $("#titleText")
-        .text("Incorrect answer! GAME OVER")
+        .text("WRONG! GAME OVER")
         .css("color", "#b20000");
       restartGame();
       return;
@@ -150,9 +150,9 @@ function addHighScore() {
     var highScores = [];
   }
   if (highScores.length < 10) {
-    name = prompt(
-      "Congrats!  You got a new high score.  Please enter your name"
-    );
+    // name = prompt(
+    //   "Congrats!  You got a new high score.  Please enter your name"
+    // );
     let newScore = new HighScore();
     highScores.push(newScore);
     highScores.sort(function(a, b) {
@@ -210,6 +210,7 @@ function restartGame() {
   level = 1;
   sequence = [];
   addHighScore();
+  showHighScores();
   resetVariables();
   score = 0;
   speed = defaultSpeed;
@@ -219,7 +220,6 @@ function restartGame() {
   updateScoreDisplay();
   $("span").text("Start");
   $(".scoreList").empty();
-  displayHighScores();
   setTimeout(function() {
     $("#titleText")
       .text("SIMON")
@@ -288,17 +288,6 @@ function updateScoreDisplay() {
   scoreDisplay.text(`Score ${score}`);
 }
 
-function displayHighScores() {
-  if (localStorage.highScores) {
-    var highScores = JSON.parse(localStorage.highScores);
-    for (var j = 0; j < highScores.length; j++) {
-      $(".scoreList").append(
-        "<li>" + highScores[j].score + " - " + highScores[j].name + "</li>"
-      );
-    }
-  }
-}
-
 function displayHighestScore() {
   if (localStorage.highScores) {
     var highScores = JSON.parse(localStorage.highScores);
@@ -307,6 +296,40 @@ function displayHighestScore() {
 }
 
 displayHighestScore();
+
+function showHighScores() {
+  $(".lights").hide();
+  hideElements();
+  $(".scoreTable").empty();
+  tr = document.createElement("tr");
+  td1 = document.createElement("td");
+  tr.appendChild(td1);
+  td1.innerHTML = "Rank";
+  td2 = document.createElement("td");
+  tr.appendChild(td2);
+  td2.innerHTML = "Name";
+  td3 = document.createElement("td");
+  tr.appendChild(td3);
+  td3.innerHTML = "Scores";
+  $(".scoreTable").append(tr);
+  var highScores = JSON.parse(localStorage.highScores);
+  for (let k = 0; k < highScores.length; k++) {
+    console.log(highScores[k]);
+    tr = document.createElement("tr");
+    td1 = document.createElement("td");
+    tr.appendChild(td1);
+    td1.innerHTML = k + 1;
+    td2 = document.createElement("td");
+    tr.appendChild(td2);
+    td2.innerHTML = highScores[k].name;
+    td3 = document.createElement("td");
+    tr.appendChild(td3);
+    td3.innerHTML = highScores[k].score;
+    $(".scoreTable").append(tr);
+  }
+
+  $(".highScoreTable").show();
+}
 
 lights.click(function(e) {
   e.preventDefault();
@@ -326,6 +349,8 @@ lights.click(function(e) {
 
 startButton.click(function(e) {
   e.preventDefault();
+  $(".highScoreTable").hide();
+  $(".lights").show();
   hideElements();
   createSequence(level);
   loopSequence(sequence);

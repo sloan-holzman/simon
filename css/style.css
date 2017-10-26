@@ -353,3 +353,9 @@ input.cmn-toggle-round:checked + label:after {
   display: block;
   top: 65%;
 }
+
+.scoreTable {
+  font-size: 25px;
+  width: 50%;
+  margin: 0 auto;
+}
