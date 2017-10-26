@@ -1,6 +1,4 @@
-let level = 1;
-let sequence = [];
-let userAnswer = [];
+//collecting elements
 let levelDisplay = $("#level");
 let lights = $(".lights");
 let firstLight = $("#light1");
@@ -8,23 +6,41 @@ let secondLight = $("#light2");
 let thirdLight = $("#light3");
 let fourthLight = $("#light4");
 let startButton = $("#start");
-let userTurn = false;
-let loopIndex = 0;
 let slider = $("#myRange");
 let sliderDisplay = $("#sliderValue");
 let scoreDisplay = $("#scoreDisplay");
 let highestScore = $("#highScore");
-let defaultTimeLeft = 10;
-let timeLeft = defaultTimeLeft;
-let timer;
-let name = "HillaryC";
-let score = 0;
-let reverseBonus = 1;
-let timerBonus = 1;
-let points = 0;
-let introSequence = [1, 2, 4, 3];
 let nameSubmit = $(".submit");
+//declaring key variables and setting initial values
+//this will go up each round
+let level = 1;
+//this is where the computer generated answer will live (i.e. the correct pattern of lights)
+let sequence = [];
+//this is where the player's answer will live
+let userAnswer = [];
+//the user won't be able to enter an answer until this variable is true.  it will flip back and forth each level
+let userTurn = false;
+//used for a loop later
+let loopIndex = 0;
+//how many seconds a user has to answer, if the timer is on
+let defaultTimeLeft = 10;
+//intially set to the default value, but decreases every second
+let timeLeft = defaultTimeLeft;
+//a variable used in the function to create the timer
+let timer;
+//a variable that will be replaced by user input if they get a high enough score
+let name = "";
+//the score will increase each level, depending on the speed, reverse, time element
+let score = 0;
+//just declaring the variable.  if reverse is on, it will become 1.5x.  that's how much the points will be boosted by
+let reverseBonus = 1;
+//see last answer, but if the timer is on
+let timerBonus = 1;
+//each level, they start with zero points and it will go up if they get the answer correct and then it will be added to the overall score
+let points = 0;
+// let introSequence = [1, 2, 4, 3];
 
+//each light corresponds to a value, which will be pushed into the sequence and useAnswer arrays
 let codes = {
   light1: 1,
   light2: 2,
@@ -56,6 +72,7 @@ let codes = {
 //   9: 9
 // };
 
+//the milliseconds and points associated with each speed level (1-9), which is the user sets with the slider
 const speedValues = {
   "1": {
     milliseconds: 1000,
@@ -95,12 +112,17 @@ const speedValues = {
   }
 };
 
+//the default speed is set to 5
 let defaultSpeed = 5;
+//and the initial speed is set to the default speed
 let speed = defaultSpeed;
 // let delay = speeds[`${speed}`];
+//the delay is a function of which speed is chosen
 let delay = speedValues[`${speed}`].milliseconds;
+//the slider initially displays 5
 slider.val(`${speed}`);
 sliderDisplay.text(`Speed: ${speed}`);
+//the high score table is hidden to start.  it will show up when the game is over
 $(".highScoreTable").hide();
 
 function createSequence(level) {
