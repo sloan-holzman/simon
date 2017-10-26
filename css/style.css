@@ -9,6 +9,35 @@ body {
   background-color: #c0c0c0;
 }
 
+header {
+  flex: 0 0 auto;
+  margin: 0 10% 0 10%;
+}
+
+content {
+  flex: 1 1 auto;
+  position: relative; /* need this to position inner content */
+  overflow-y: scroll;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 10% 0 10%;
+}
+
+footer {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0px auto 10px auto;
+}
+
+#gameBoard {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-bottom;
+}
+
 #rightSide,
 .rightInfo {
   display: flex;
@@ -18,17 +47,24 @@ body {
 .rightInfo {
   align-items: flex-start;
   justify-content: center;
-}
-
-#gameBoard {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-bottom;
-}
-
-.rightInfo {
   height: 50%;
   text-align: left;
+  color: #b20000;
+}
+
+#bottomInfo {
+  color: black;
+  font-size: 25px;
+}
+
+.optionRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.switchLabel {
+  margin: 5px 50% 5px 20px;
+  width: 50%;
 }
 
 select.dropdown {
@@ -66,25 +102,6 @@ select.dropdown {
   border-width: 1px;
   height: 50px;
   text-align: left;
-}
-
-header {
-  flex: 0 0 auto;
-  margin: 0 10% 0 10%;
-}
-
-content {
-  flex: 1 1 auto;
-  position: relative; /* need this to position inner content */
-  overflow-y: scroll;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  margin: 0 10% 0 10%;
-}
-
-footer {
-  flex: 0 0 auto;
 }
 
 ::-webkit-scrollbar {
@@ -230,8 +247,53 @@ h2 {
   opacity: 0.5;
 }
 
-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+/*everything below is for the switch*/
+
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+input.cmn-toggle-round + label {
+  padding: 2px;
+  width: 80px;
+  height: 40px;
+  background-color: #c0c0c0;
+  border-radius: 40px;
+}
+input.cmn-toggle-round + label:before,
+input.cmn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.cmn-toggle-round + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 40px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+  width: 39px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: margin 0.4s;
+}
+input.cmn-toggle-round:checked + label:before {
+  background-color: #4caf50;
+}
+input.cmn-toggle-round:checked + label:after {
+  margin-left: 40px;
 }

@@ -32,14 +32,28 @@
           <div class="stats" id="highScore">High Score 0</div>
         </div>
         <div class="rightInfo" id="bottomInfo">
-          <select single class="dropdown" id="answerOrder">
+          <!-- <select single class="dropdown" id="answerOrder">
             <option value="same">Answer in same order</option>
             <option value="reverse">Answer in reverse order</option>
-          </select>
-          <select single class="dropdown" id="timer">
+          </select> -->
+          <!-- <select single class="dropdown" id="timer">
             <option value="on">Timer on</option>
             <option value="off">Timer off</option>
-          </select>
+          </select> -->
+          <div class="optionRow">
+            <div class="switchLabel">Reverse</div>
+            <div class="switch">
+              <input id="reverseSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
+              <label for="reverseSwitch"></label>
+            </div>
+          </div>
+          <div class="optionRow">
+            <div class="switchLabel">Timer</div>
+            <div class="switch">
+              <input id="timerSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
+              <label for="timerSwitch"></label>
+            </div>
+          </div>
           <div id="slidecontainer">
             <button class="button" id="sliderValue">Speed: 5</button>
             <input type="range" min="1" max="9" value="5" class="slider" id="myRange">

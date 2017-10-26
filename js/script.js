@@ -125,7 +125,7 @@ function flashLight(light) {
 
 function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
-    if ($("#answerOrder option:selected").val() === "reverse") {
+    if ($("#reverseSwitch").is(":checked")) {
       var userInputIndex = userInput.length - i - 1;
     } else {
       var userInputIndex = i;
@@ -221,40 +221,38 @@ function increaseSpeed(level) {
 }
 
 function decidePoints() {
-  if ($("#answerOrder option:selected").val() === "reverse") {
+  if ($("#reverseSwitch").is(":checked")) {
     reverseBonus = 1.5;
+    console.log("reverse");
   } else {
     reverseBonus = 1;
+    console.log("normal");
   }
-  if ($("#timer option:selected").val() === "on") {
+  if ($("#timerSwitch").is(":checked")) {
     timerBonus = 1.5;
+    console.log("checked");
   } else {
     timerBonus = 1;
+    console.log("not checked");
   }
   points = basePoints[`${speed}`] * reverseBonus * timerBonus;
 }
 
 function hideElements() {
-  $("#timer").hide();
-  $("#slidecontainer").hide();
-  $("#answerOrder").hide();
-  $(".button").hide();
+  $("#bottomInfo").hide();
 }
 
 function showElements() {
-  $("#timer").show();
-  $("#slidecontainer").show();
-  $("#answerOrder").show();
-  $(".button").show();
+  $("#bottomInfo").show();
 }
 
 function responseTimer() {
-  if ($("#timer option:selected").val() === "on") {
+  if ($("#timerSwitch").is(":checked")) {
     console.log("timer selected");
     timeLeft--;
     $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
     if (timeLeft <= defaultTimeLeft / 2) {
-      $(".countdown").css("color", "red");
+      $(".countdown").css("color", "#b20000");
     }
     if (timeLeft <= 0) {
       alert("ran out of time!  you lose");
