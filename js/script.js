@@ -131,7 +131,9 @@ function checkAnswer(answer, userInput) {
       var userInputIndex = i;
     }
     if (answer[i] !== userInput[userInputIndex]) {
-      alert("incorrect answer");
+      $("#titleText")
+        .text("Incorrect answer! GAME OVER")
+        .css("color", "#b20000");
       restartGame();
       return;
     }
@@ -187,6 +189,7 @@ function resetVariables() {
   $(".countdown").text(``);
   levelDisplay.text(`Level ${level}`);
 }
+
 function increaseLevel() {
   level += 1;
   decidePoints();
@@ -194,7 +197,9 @@ function increaseLevel() {
   score += points;
   resetVariables();
   updateScoreDisplay();
-  alert(`you got it!!  click start when you are ready to begin level ${level}`);
+  $("#titleText")
+    .text(`CORRECT!`)
+    .css("color", "#4caf50");
 }
 
 function restartGame() {
@@ -210,6 +215,11 @@ function restartGame() {
   updateScoreDisplay();
   $(".scoreList").empty();
   displayHighScores();
+  setTimeout(function() {
+    $("#titleText")
+      .text("SIMON")
+      .css("color", "black");
+  }, 3000);
 }
 
 function increaseSpeed(level) {
@@ -240,10 +250,12 @@ function decidePoints() {
 
 function hideElements() {
   $("#bottomInfo").hide();
+  startButton.hide();
 }
 
 function showElements() {
   $("#bottomInfo").show();
+  startButton.show();
 }
 
 function responseTimer() {
@@ -255,7 +267,9 @@ function responseTimer() {
       $(".countdown").css("color", "#b20000");
     }
     if (timeLeft <= 0) {
-      alert("ran out of time!  you lose");
+      $("#titleText")
+        .text(`You ran out of time.  GAME OVER!`)
+        .css("color", "#b20000");
       restartGame();
     }
   }
@@ -310,6 +324,9 @@ startButton.click(function(e) {
   hideElements();
   createSequence(level);
   loopSequence(sequence);
+  $("#titleText")
+    .text(`SIMON`)
+    .css("color", "black");
 });
 
 // Update the current slider value (each time you drag the slider handle)
