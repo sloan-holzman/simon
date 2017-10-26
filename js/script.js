@@ -23,6 +23,7 @@ let reverseBonus = 1;
 let timerBonus = 1;
 let points = 0;
 let introSequence = [1, 2, 4, 3];
+let nameSubmit = $(".submit");
 
 let codes = {
   light1: 1,
@@ -135,11 +136,26 @@ function checkAnswer(answer, userInput) {
       $("#titleText")
         .text("WRONG! GAME OVER")
         .css("color", "#b20000");
-      restartGame();
+      checkHighScore();
       return;
     }
   }
   increaseLevel();
+}
+
+function checkHighScore() {
+  if (localStorage.highScores) {
+    var highScores = JSON.parse(localStorage.highScores);
+  } else {
+    var highScores = [];
+  }
+  if (highScores.length < 10) {
+    inputName();
+  } else if (score > highScores[9].score) {
+    inputName();
+  } else {
+    restartGame();
+  }
 }
 
 //will need to refactor this...it's too long!
@@ -150,19 +166,14 @@ function addHighScore() {
     var highScores = [];
   }
   if (highScores.length < 10) {
-    // name = prompt(
-    //   "Congrats!  You got a new high score.  Please enter your name"
-    // );
     let newScore = new HighScore();
     highScores.push(newScore);
     highScores.sort(function(a, b) {
       return b.score - a.score;
     });
     localStorage.highScores = JSON.stringify(highScores);
+    restartGame();
   } else if (score > highScores[9].score) {
-    name = prompt(
-      "Congrats!  You got a new high score.  Please enter your name"
-    );
     let newScore = new HighScore();
     highScores.pop();
     highScores.push(newScore);
@@ -170,6 +181,7 @@ function addHighScore() {
       return b.score - a.score;
     });
     localStorage.highScores = JSON.stringify(highScores);
+    restartGame();
   }
 }
 
@@ -209,7 +221,6 @@ function increaseLevel() {
 function restartGame() {
   level = 1;
   sequence = [];
-  addHighScore();
   showHighScores();
   resetVariables();
   score = 0;
@@ -225,6 +236,10 @@ function restartGame() {
       .text("SIMON")
       .css("color", "black");
   }, 3000);
+}
+
+function inputName() {
+  $("#myModal").css("display", "block");
 }
 
 function increaseSpeed(level) {
@@ -275,7 +290,7 @@ function responseTimer() {
       $("#titleText")
         .text(`You ran out of time.  GAME OVER!`)
         .css("color", "#b20000");
-      restartGame();
+      checkHighScore();
     }
   }
 }
@@ -345,6 +360,13 @@ lights.click(function(e) {
       checkAnswer(sequence, userAnswer);
     }
   }
+});
+
+nameSubmit.click(function(e) {
+  e.preventDefault();
+  name = $("input").val();
+  $("#myModal").css("display", "none");
+  addHighScore();
 });
 
 startButton.click(function(e) {
