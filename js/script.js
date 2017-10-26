@@ -254,12 +254,12 @@ function decidePoints() {
 }
 
 function hideElements() {
-  $("#bottomInfo").hide();
+  $(".optionRow").hide();
   startButton.hide();
 }
 
 function showElements() {
-  $("#bottomInfo").show();
+  $(".optionRow").show();
   startButton.show();
 }
 

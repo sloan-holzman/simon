@@ -62,6 +62,7 @@ footer {
   font-size: 25px;
   height: 50%;
   flex-grow: 1;
+  min-height: 50%;
 }
 
 #topInfo {
@@ -175,7 +176,7 @@ select.dropdown {
 #titleText {
   letter-spacing: 2.5px;
   font-size: 50px;
-  margin: 0px;
+  margin: 1% auto 1% auto;
 }
 
 h2 {
