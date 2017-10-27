@@ -20,8 +20,8 @@ main {
 
 footer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
   min-height: 20%;
 }
 
@@ -48,6 +48,7 @@ footer {
 #rightHeader {
   width: 30%;
   margin: 0 10% 0 0;
+  text-align: left;
 }
 
 .rightInfo {
@@ -339,6 +340,12 @@ input.cmn-toggle-round:checked + label:after {
   left: 40%;
 }
 
+#scoreDisplay:hover + #scoreBox {
+  display: block;
+  top: 25%;
+  color: black;
+}
+
 #reverse:hover + #reverseBox {
   display: block;
   top: 50%;
@@ -351,7 +358,13 @@ input.cmn-toggle-round:checked + label:after {
 
 #sliderValue:hover + #speedBox {
   display: block;
-  top: 65%;
+  top: 60%;
+}
+
+#instructions:hover + #instructionsBox {
+  display: block;
+  top: 30%;
+  left: 25%;
 }
 
 .scoreTable {
@@ -380,4 +393,12 @@ input.cmn-toggle-round:checked + label:after {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+}
+
+#instructions {
+  margin: 0 0 0 20px;
+}
+
+#scoreDisplay {
+  color: #b20000;
 }
