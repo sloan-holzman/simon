@@ -25,12 +25,12 @@ footer {
   min-height: 20%;
 }
 
-.leftSide {
+.leftHF {
   width: 50%;
   margin: 0 0 0 10%;
 }
 
-.rightSide {
+.rightHF {
   width: 30%;
   margin: 0 10% 0 0;
   text-align: left;
@@ -43,8 +43,6 @@ footer {
 
 #rightSide,
 .rightInfo {
-  /*display: flex;
-  flex-direction: column;*/
   width: 30%;
   margin: 0 10% 0 0;
   display: flex;
@@ -58,16 +56,16 @@ footer {
   color: #b20000;
 }
 
+#topInfo,
+#bottomInfo {
+  flex-grow: 1;
+}
+
 #bottomInfo {
   color: black;
   font-size: 25px;
   height: 50%;
-  flex-grow: 1;
   min-height: 50%;
-}
-
-#topInfo {
-  flex-grow: 1;
 }
 
 .optionRow {
@@ -85,7 +83,15 @@ a {
   width: 100%;
 }
 
-select.dropdown {
+#instructions {
+  margin: 0 0 0 20px;
+}
+
+#scoreDisplay {
+  color: #b20000;
+}
+
+/*select.dropdown {
   -webkit-appearance: button;
   -webkit-user-select: none;
   background-repeat: no-repeat;
@@ -101,7 +107,7 @@ select.dropdown {
   text-align: center;
   border-radius: 12px;
   height: 50px;
-}
+}*/
 
 ::-webkit-scrollbar {
   width: 0px; /* remove scrollbar space */
@@ -327,6 +333,8 @@ input.cmn-toggle-round:checked + label:after {
   margin-left: 40px;
 }
 
+/*everything below is for the hover boxes*/
+
 .box {
   display: none;
   position: absolute;
@@ -367,12 +375,14 @@ input.cmn-toggle-round:checked + label:after {
   left: 25%;
 }
 
+/*for the high score table*/
 .scoreTable {
   font-size: 25px;
   width: 50%;
   margin: 0 auto;
 }
 
+/*for the name input modal if you get a high score*/
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -393,12 +403,4 @@ input.cmn-toggle-round:checked + label:after {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
-}
-
-#instructions {
-  margin: 0 0 0 20px;
-}
-
-#scoreDisplay {
-  color: #b20000;
 }
