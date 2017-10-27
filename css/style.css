@@ -9,16 +9,26 @@ body {
 }
 
 main {
+  /*
+    max-width
+    margin: 0 auto;
+  */
   display: flex;
+  flex-grow: 2;
   flex-direction: column;
-  width: 65%;
-  margin: 0% 0% 4% 10%;
+  max-width: 600px;
+  min-width: 300px;
+  width: 500px;
+  margin: 0 0 0 auto;
 }
 
 nav {
-  width: 35%;
   flex-direction: column;
-  margin: 2% 10% 2% 0%;
+  flex-grow: 1;
+  max-width: 300px;
+  min-width: 100px;
+  width: 200px;
+  margin: 0 auto 0 0;
 }
 
 .top {
@@ -33,11 +43,24 @@ nav {
   height: 8%;
   flex-grow: 1;
   margin-top: 2%;
+  height: 10vh;
+  min-height: 100px;
 }
 
 #gameBoard {
   flex-grow: 9;
-  height: 75%;
+  /*
+    flex 2
+  */
+}
+
+.lights {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  height: 70vh;
+  min-height: 200px;
+  max-height: 800px;
 }
 
 #rightSide,
@@ -48,6 +71,9 @@ nav {
 
 #rightSide {
   height: 80%;
+  /*
+    flex 1
+  */
 }
 
 .rightInfo {
@@ -135,15 +161,13 @@ h2 {
   font-style: italic;
 }
 
-.lights {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
+/*
+  height, min-height, max-height
+  width, min-width, max-width
+*/
 .light {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   opacity: 0.2;
 }
 
@@ -167,50 +191,54 @@ h2 {
 
 #light1 {
   background-color: green;
-  border-top-left-radius: 100px;
+  border-top-left-radius: 250px;
 }
 
 #light2 {
   background-color: red;
-  border-top-right-radius: 100px;
+  border-top-right-radius: 250px;
 }
 
 #light3 {
   background-color: yellow;
-  border-bottom-left-radius: 100px;
+  border-bottom-left-radius: 250px;
 }
 
 #light4 {
   background-color: blue;
-  border-bottom-right-radius: 100px;
+  border-bottom-right-radius: 250px;
 }
 
 #slidecontainer {
   width: 100%; /* Width of the outside container */
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 900px) {
   body {
-    flex-direction: column;
-    height: 100%;
     flex-wrap: wrap;
-    margin: 0px;
   }
   main {
-    width: 100%;
-    margin: 4% 1% 4% auto;
+    max-width: 500px;
+    min-width: 250px;
+    margin: 0 auto;
   }
   nav {
-    width: 100%;
-    margin: 2% auto 2% 0%;
+    max-width: 500px;
+    min-width: 250px;
+    margin: 0 auto;
   }
   #gameBoard {
-    height: 300px;
-    width: 100vw;
   }
 
   #topInfo {
+    align-items: center;
+  }
+  #bottomInfo {
+    justify-content: center;
+  }
+  .right.bottom {
+    align-items: center;
     text-align: center;
-    width: 100vw;
+    padding: 0px;
   }
 }
