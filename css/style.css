@@ -213,7 +213,7 @@ h2 {
   width: 100%; /* Width of the outside container */
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 749px) {
   body {
     flex-wrap: wrap;
     margin: 0 auto;
