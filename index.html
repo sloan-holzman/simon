@@ -55,33 +55,29 @@
           <div class="stats" id="highScore">High Score 0</div>
         </div>
         <div class="rightInfo" id="bottomInfo">
-          <div class="optionColumn">
-            <div>
-              <a href="" class="switchLabel" id="reverse">Reverse</a>
-              <div class="box" id="reverseBox">REVERSE: Click to the right to turn on reverse.  If reverse is on, player must enter the pattern backwards.  For example, if the game flashes 'red', 'blue', 'green' then the play must enter 'green', 'blue', then 'red'. Points are multiplied by 1.5X</div>
-            </div>
-            <div>
-              <a href="" class="switchLabel" id="timer">Timer</a>
-              <div class="box" id="timerBox">TIMER: Click to the right to turn on the timer.  If the timer is on, player must start entering the pattern within 10 seconds and points are multiplied by 1.5X</div>
-            </div>
-            <div id="slidecontainer">
-                <a href="" class="switchLabel" id="sliderValue">Speed: 5</a>
-                <div class="box" id="speedBox">SPEED: Move the slider to the right to increase or decrease the speed of the light pattern.  The speed automatically increases at level 6, 10, and 14.  Speed values range from 1-9.  Player gets one extra point for every level of speed times possible multipliers for reverse and timer</div>
-            </div>
-          </div>
-          <div class="optionColumn">
-            <div class="switch">
-                <input id="reverseSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
-                <label for="reverseSwitch"></label>
-            </div>
-            <div class="switch">
+          <table style="width:100%" class="optionRow">
+          <tr>
+            <td><a href="" class="switchLabel" id="reverse">Reverse</a><div class="box" id="reverseBox">REVERSE: Click to the right to turn on reverse.  If reverse is on, player must enter the pattern backwards.  For example, if the game flashes 'red', 'blue', 'green' then the play must enter 'green', 'blue', then 'red'. Points are multiplied by 1.5X</div></td>
+            <td><div class="switch">
+              <input id="reverseSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
+              <label for="reverseSwitch"></label>
+            </div></td>
+          </tr>
+          <tr>
+            <td><a href="" class="switchLabel" id="timer">Timer</a><div class="box" id="timerBox">TIMER: Click to the right to turn on the timer.  If the timer is on, player must start entering the pattern within 10 seconds and points are multiplied by 1.5X</div></td>
+            <td><div class="switch">
               <input id="timerSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
               <label for="timerSwitch"></label>
-            </div>
-            <div class="switch">
-              <input type="range" min="1" max="9" value="5" class="slider" id="myRange"></td>
-            </div>
-          </div>
+            </div></td>
+          </tr>
+          <tr>
+            <td><div id="slidecontainer">
+                  <a href="" class="switchLabel" id="sliderValue">Speed: 5</a><div class="box" id="speedBox">SPEED: Move the slider to the right to increase or decrease the speed of the light pattern.  The speed automatically increases at level 6, 10, and 14.  Speed values range from 1-9.  Player gets one extra point for every level of speed times possible multipliers for reverse and timer</div>
+                </div>
+            </td>
+            <td><input type="range" min="1" max="9" value="5" class="slider" id="myRange"></td>
+          </tr>
+        </table>
         </div>
       </div>
       <div class="right bottom">

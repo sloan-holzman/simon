@@ -234,8 +234,13 @@ h2 {
     align-items: center;
   }
   #bottomInfo {
+  }
+  .optionRow {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
   }
+
   .right.bottom {
     align-items: center;
     text-align: center;
