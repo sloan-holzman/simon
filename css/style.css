@@ -15,7 +15,7 @@ header {
 main {
   flex-grow: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 footer {
@@ -25,26 +25,29 @@ footer {
   min-height: 20%;
 }
 
-.leftHF {
-  width: 50%;
-  margin: 0 0 0 10%;
-}
-
-.rightHF {
-  width: 30%;
-  margin: 0 10% 0 0;
-  text-align: left;
-}
-
+.leftHF,
 #gameBoard {
   width: 50%;
   margin: 0 0 0 10%;
 }
 
+.rightHF,
 #rightSide,
 .rightInfo {
   width: 30%;
   margin: 0 10% 0 0;
+  text-align: left;
+}
+
+/*#gameBoard {
+  width: 50%;
+  margin: 0 0 0 10%;
+}*/
+
+#rightSide,
+.rightInfo {
+  /*width: 30%;
+  margin: 0 10% 0 0;*/
   display: flex;
   flex-direction: column;
 }
@@ -127,7 +130,7 @@ a {
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 15px 150px;
+  padding: 3.25% 20%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -144,7 +147,7 @@ a {
   100% {
     opacity: 1;
     right: 0;
-    padding: 15px 180px;
+    padding: 3.25% 25%;
   }
 }
 
@@ -160,12 +163,13 @@ a {
   position: absolute;
   opacity: 0;
   top: 0;
-  right: -20px;
+  right: -25%;
   transition: 0.5s;
 }
 
 .button:hover span {
-  padding-right: 25px;
+  padding-right: 25%;
+  padding-left: 25%;
 }
 
 .button:hover span:after {
@@ -175,7 +179,7 @@ a {
 
 .button:hover {
   opacity: 1;
-  padding: 15px 180px;
+  padding: 3.25% 15%;
   transition: 1s;
   animation-play-state: paused;
 }
@@ -403,4 +407,34 @@ input.cmn-toggle-round:checked + label:after {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+}
+
+@media screen and (max-width: 750px) {
+  body {
+    height: 100%;
+  }
+
+  main {
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-grow: 1;
+  }
+  footer {
+    order: 1;
+  }
+
+  #gameBoard {
+    order: 0;
+    height: 200px;
+    width: 200px;
+    margin: auto;
+  }
+
+  .rightHF,
+  #rightSide,
+  .rightInfo {
+    order: 1;
+    width: 30%;
+    margin: auto;
+  }
 }

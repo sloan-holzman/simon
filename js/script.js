@@ -294,7 +294,7 @@ $(document).ready(function() {
     delay = speedValues[`${speed}`].milliseconds;
     //display the new high scores
     updateScoreDisplay();
-    $("span").text("Start");
+    $("span").text("Start New Game");
     $(".scoreList").empty();
     //after 3 seconds, update the header back to Simon
     setTimeout(function() {
