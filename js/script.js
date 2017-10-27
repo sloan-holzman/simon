@@ -125,12 +125,15 @@ sliderDisplay.text(`Speed: ${speed}`);
 //the high score table is hidden to start.  it will show up when the game is over
 $(".highScoreTable").hide();
 
+//creates the sequence of lights that the player has to match
 function createSequence(level) {
+  //for level 1, the sequence is two lights at random
   if (level === 1) {
     for (let i = 0; i < 2; i++) {
       let randomLight = Math.round(Math.random() * 3) + 1;
       sequence.push(randomLight);
     }
+    //if it's not level one, start with the old sequence and add one
   } else {
     let randomLight = Math.round(Math.random() * 3) + 1;
     sequence.push(randomLight);
@@ -138,23 +141,27 @@ function createSequence(level) {
 }
 
 function loopSequence(sequence) {
+  //after the delay...
   setTimeout(function() {
-    // (3) do action
+    // flash the a light in the sequence
     checkLight(sequence[loopIndex]);
-
-    // (4) if the end of the array has been reached, stop
+    // if it's the end of the array has been reached, stop the function...
     if (++loopIndex >= sequence.length) {
+      //make it the user's turn
       userTurn = true;
+      //and turn on the timer program, which will run every 1000 milliseconds
       timer = setInterval(function() {
         responseTimer();
       }, 1000);
       return;
     }
+    //...if not, run through the function again
     loopSequence(sequence);
   }, delay);
   console.log(sequence);
 }
 
+//checkLight reads a number and runs flashLight for the corresponding div
 function checkLight(light) {
   switch (light) {
     case 1:
@@ -172,6 +179,7 @@ function checkLight(light) {
   }
 }
 
+//flashes the light (turns the opacity up to 1 for half the delay)
 function flashLight(light) {
   light.css("opacity", 1);
   setTimeout(function() {
@@ -179,13 +187,17 @@ function flashLight(light) {
   }, delay / 2);
 }
 
+//runs through the user's sequence and checks against the computer's sequence to see if they're the same
 function checkAnswer(answer, userInput) {
   for (let i = 0; i < answer.length; i++) {
+    //checks if reverse order if set to reverse
     if ($("#reverseSwitch").is(":checked")) {
       var userInputIndex = userInput.length - i - 1;
+      //runs in regular order if not set to reverse
     } else {
       var userInputIndex = i;
     }
+    //if answer is wrong, changes title to wrong answer, and runs checkHighScore (i.e. check if the user's score qualifies for high score)
     if (answer[i] !== userInput[userInputIndex]) {
       $("#titleText")
         .text("WRONG! GAME OVER")
@@ -194,25 +206,46 @@ function checkAnswer(answer, userInput) {
       return;
     }
   }
+  //if none of the answers are wrong, run increase level
   increaseLevel();
 }
 
+//checks if the score is high enough to qualify for top 10
 function checkHighScore() {
+  //if there's already a list of high scores in store, pull it into the variable highScores
   if (localStorage.highScores) {
     var highScores = JSON.parse(localStorage.highScores);
   } else {
+    //if not, create an empty array
     var highScores = [];
   }
+  //if there are less than 10 high scores, the score automatically qualifies
   if (highScores.length < 10) {
     inputName();
+    //if there are more than 10, it has to be higher than the 10th highest score
   } else if (score > highScores[9].score) {
     inputName();
+    //if not higher than 10th highest, just restart the game
   } else {
     restartGame();
   }
 }
 
+//pops up the form for the user to enter their name (to be recorded in high scores)
+function inputName() {
+  $("#myModal").css("display", "block");
+}
+
+//after the user enters his/her name, hide the form and run addHighScore
+nameSubmit.click(function(e) {
+  e.preventDefault();
+  name = $("input").val();
+  $("#myModal").css("display", "none");
+  addHighScore();
+});
+
 //will need to refactor this...it's too long!
+//create a new high score, add it to the list, and re-order the list, then restart the game
 function addHighScore() {
   if (localStorage.highScores) {
     var highScores = JSON.parse(localStorage.highScores);
@@ -239,6 +272,7 @@ function addHighScore() {
   }
 }
 
+//this creates the new high score
 class HighScore {
   constructor() {
     this.name = name;
@@ -246,6 +280,31 @@ class HighScore {
   }
 }
 
+//too long...will need to refactor
+//refresh some key variables, clear out the sequence of correct answers
+function restartGame() {
+  level = 1;
+  sequence = [];
+  showHighScores();
+  resetVariables();
+  score = 0;
+  speed = defaultSpeed;
+  slider.val(`${speed}`);
+  sliderDisplay.text(`Speed: ${speed}`);
+  delay = speedValues[`${speed}`].milliseconds;
+  //display the new high scores
+  updateScoreDisplay();
+  $("span").text("Start");
+  $(".scoreList").empty();
+  //after 3 seconds, update the header back to Simon
+  setTimeout(function() {
+    $("#titleText")
+      .text("SIMON")
+      .css("color", "black");
+  }, 3000);
+}
+
+//reset some of the key variables, necessary when changing levels or restarting the game
 function resetVariables() {
   userAnswer = [];
   userTurn = false;
@@ -257,6 +316,7 @@ function resetVariables() {
   levelDisplay.text(`Level ${level}`);
 }
 
+//when increasing levels, calculate how many points were earned, increase the speed if necessary, increase the score, update the score display
 function increaseLevel() {
   if (level === 1) {
     $("span").text("Next Level");
@@ -272,31 +332,7 @@ function increaseLevel() {
     .css("color", "#4caf50");
 }
 
-function restartGame() {
-  level = 1;
-  sequence = [];
-  showHighScores();
-  resetVariables();
-  score = 0;
-  speed = defaultSpeed;
-  slider.val(`${speed}`);
-  sliderDisplay.text(`Speed: ${speed}`);
-  // delay = speeds[`${speed}`];
-  delay = speedValues[`${speed}`].milliseconds;
-  updateScoreDisplay();
-  $("span").text("Start");
-  $(".scoreList").empty();
-  setTimeout(function() {
-    $("#titleText")
-      .text("SIMON")
-      .css("color", "black");
-  }, 3000);
-}
-
-function inputName() {
-  $("#myModal").css("display", "block");
-}
-
+//increase the speed at levels 6, 10, and 14
 function increaseSpeed(level) {
   if (level === 6 || level === 10 || level === 14) {
     speed = Math.min(9, speed + 1);
@@ -305,6 +341,7 @@ function increaseSpeed(level) {
   }
 }
 
+//calculate how many points were earned at the end of each level
 function decidePoints() {
   if ($("#reverseSwitch").is(":checked")) {
     reverseBonus = 1.5;
@@ -320,16 +357,20 @@ function decidePoints() {
   points = speedValues[`${speed}`].points * reverseBonus * timerBonus;
 }
 
+//hide reverse, timer, and speed so that player can't touch them after the sequence has started flashing
 function hideElements() {
   $(".optionRow").hide();
   startButton.hide();
 }
 
+//bring back reverse, timer, and speed after the level is over
 function showElements() {
   $(".optionRow").show();
   startButton.show();
 }
 
+//if the timer is one, count down from 10 and change to red once there are 5 seconds left
+//note, function is run using SetInterval every second in the LoopSequence function
 function responseTimer() {
   if ($("#timerSwitch").is(":checked")) {
     timeLeft--;
@@ -346,14 +387,17 @@ function responseTimer() {
   }
 }
 
+//clears the timer
 function stopTimer() {
   clearInterval(timer);
 }
 
+//updates the score shown on the screen
 function updateScoreDisplay() {
   scoreDisplay.text(`Score ${score}`);
 }
 
+//displays the highest score of all time
 function displayHighestScore() {
   if (localStorage.highScores) {
     var highScores = JSON.parse(localStorage.highScores);
@@ -361,8 +405,10 @@ function displayHighestScore() {
   }
 }
 
+//displays it when the screen starts
 displayHighestScore();
 
+//creates a row for each of the 10 highest scores
 function showHighScores() {
   $(".lights").hide();
   hideElements();
@@ -392,39 +438,42 @@ function showHighScores() {
     td3.innerHTML = highScores[k].score;
     $(".scoreTable").append(tr);
   }
-
+  //then shows the table
   $(".highScoreTable").show();
 }
 
+//when each light is clicked, adds a number to the userAnswer array
 lights.click(function(e) {
   e.preventDefault();
+  //can only add numbers if it's the user's turn and the array isn't at length
   if (
     userAnswer.length < sequence.length &&
     userTurn &&
     $(e.target).is(".light")
   ) {
     userAnswer.push(codes[$(e.target).attr("id")]);
+    //stops the timer from running
     stopTimer();
     flashLight($(e.target));
+    //once the array is full, start checking if the answer is right
     if (userAnswer.length === sequence.length) {
       checkAnswer(sequence, userAnswer);
     }
   }
 });
 
-nameSubmit.click(function(e) {
-  e.preventDefault();
-  name = $("input").val();
-  $("#myModal").css("display", "none");
-  addHighScore();
-});
-
+//start button...
 startButton.click(function(e) {
   e.preventDefault();
+  //hides the high score table
   $(".highScoreTable").hide();
+  //shows the gameboard
   $(".lights").show();
+  //hides the Return, Timer, and Speed
   hideElements();
+  //creates the correct answer
   createSequence(level);
+  //flashes it to the user
   loopSequence(sequence);
   $("#titleText")
     .text(`SIMON`)
