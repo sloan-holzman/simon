@@ -216,6 +216,7 @@ h2 {
 @media screen and (max-width: 900px) {
   body {
     flex-wrap: wrap;
+    margin: 0 auto;
   }
   main {
     max-width: 500px;
@@ -245,5 +246,14 @@ h2 {
     align-items: center;
     text-align: center;
     padding: 0px;
+    order: 2;
+  }
+
+  .right.top {
+    height: 0px;
+  }
+
+  #instructions {
+    margin: 0;
   }
 }
