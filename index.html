@@ -7,83 +7,87 @@
     <script type="text/javascript" src="js/script.js" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/controls.css">
     <link rel="shortcut icon" href="simon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <main>
-    <div class="left top">
-      <h1 id="titleText">SIMON</h1>
-    </div>
-      <section id="gameBoard">
-        <div class="lights">
-          <div class="lightColumn" id="column1">
-            <div class="light" id="light1"></div>
-            <div class="light" id="light3"></div>
+      <div class="left top">
+        <h1 id="titleText">SIMON</h1>
+      </div>
+        <section id="gameBoard">
+          <div class="lights">
+            <div class="lightColumn" id="column1">
+              <div class="light" id="light1"></div>
+              <div class="light" id="light3"></div>
+            </div>
+            <div class="lightColumn" id="column2">
+              <div class="light" id="light2"></div>
+              <div class="light" id="light4"></div>
+            </div>
           </div>
-          <div class="lightColumn" id="column2">
-            <div class="light" id="light2"></div>
-            <div class="light" id="light4"></div>
+          <div class="highScoreTable">
+            <table class="scoreTable"></table>
           </div>
-        </div>
-        <div class="highScoreTable">
-          <table class="scoreTable"></table>
-        </div>
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <p>Congrats!  You acheived a high score.  Please enter your name.</p>
-            <input class="input" type="text" placeholder="Your name"/>
-            <input class="submit" type="button" value="submit" />
+          <div id="myModal" class="modal">
+            <div class="modal-content">
+              <p>Congrats!  You acheived a high score.  Please enter your name.</p>
+              <input class="input" type="text" placeholder="Your name"/>
+              <input class="submit" type="button" value="submit" />
+            </div>
           </div>
-        </div>
-      </section>
-      <section class="left bottom">
-        <form id="form">
-          <button class="button" id="start"><span>Start</span></button>
-        </form>
-        <p class="countdown"></p>
-      </section>
+        </section>
+        <section class="left bottom">
+          <form id="form">
+            <button class="button" id="start"><span>Start</span></button>
+          </form>
+          <p class="countdown"></p>
+        </section>
     </main>
-      <nav>
-        <div class="right top">
+    <nav>
+      <div class="right top">
+      </div>
+      <div id="rightSide">
+        <div class="rightInfo" id="topInfo">
+          <div class="stats" id="level">Level 1</div>
+          <a href="" class="stats" id="scoreDisplay">Score 0</a><div class="box" id="scoreBox">SCORE: Players earn 1 point per level for each point of speed, multiplied by 1.5X if Reverse is on and another 1.5X if the Timer is on.<br><br>For example, a player at speed 5, set on Reverse, with the Timer on, would earn 11.25 points per level (5pts * 1.5X * 1.5X)</div>
+          <div class="stats" id="highScore">High Score 0</div>
         </div>
-        <div id="rightSide">
-          <div class="rightInfo" id="topInfo">
-            <div class="stats" id="level">Level 1</div>
-            <a href="" class="stats" id="scoreDisplay">Score 0</a><div class="box" id="scoreBox">SCORE: Players earn 1 point per level for each point of speed, multiplied by 1.5X if Reverse is on and another 1.5X if the Timer is on.<br><br>For example, a player at speed 5, set on Reverse, with the Timer on, would earn 11.25 points per level (5pts * 1.5X * 1.5X)</div>
-            <div class="stats" id="highScore">High Score 0</div>
+        <div class="rightInfo" id="bottomInfo">
+          <div class="optionColumn">
+            <div>
+              <a href="" class="switchLabel" id="reverse">Reverse</a>
+              <div class="box" id="reverseBox">REVERSE: Click to the right to turn on reverse.  If reverse is on, player must enter the pattern backwards.  For example, if the game flashes 'red', 'blue', 'green' then the play must enter 'green', 'blue', then 'red'. Points are multiplied by 1.5X</div>
+            </div>
+            <div>
+              <a href="" class="switchLabel" id="timer">Timer</a>
+              <div class="box" id="timerBox">TIMER: Click to the right to turn on the timer.  If the timer is on, player must start entering the pattern within 10 seconds and points are multiplied by 1.5X</div>
+            </div>
+            <div id="slidecontainer">
+                <a href="" class="switchLabel" id="sliderValue">Speed: 5</a>
+                <div class="box" id="speedBox">SPEED: Move the slider to the right to increase or decrease the speed of the light pattern.  The speed automatically increases at level 6, 10, and 14.  Speed values range from 1-9.  Player gets one extra point for every level of speed times possible multipliers for reverse and timer</div>
+            </div>
           </div>
-          <div class="rightInfo" id="bottomInfo">
-            <table style="width:100%" class="optionRow">
-            <tr>
-              <td><a href="" class="switchLabel" id="reverse">Reverse</a><div class="box" id="reverseBox">REVERSE: Click to the right to turn on reverse.  If reverse is on, player must enter the pattern backwards.  For example, if the game flashes 'red', 'blue', 'green' then the play must enter 'green', 'blue', then 'red'. Points are multiplied by 1.5X</div></td>
-              <td><div class="switch">
+          <div class="optionColumn">
+            <div class="switch">
                 <input id="reverseSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
                 <label for="reverseSwitch"></label>
-              </div></td>
-            </tr>
-            <tr>
-              <td><a href="" class="switchLabel" id="timer">Timer</a><div class="box" id="timerBox">TIMER: Click to the right to turn on the timer.  If the timer is on, player must start entering the pattern within 10 seconds and points are multiplied by 1.5X</div></td>
-              <td><div class="switch">
-                <input id="timerSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
-                <label for="timerSwitch"></label>
-              </div></td>
-            </tr>
-            <tr>
-              <td><div id="slidecontainer">
-                    <a href="" class="switchLabel" id="sliderValue">Speed: 5</a><div class="box" id="speedBox">SPEED: Move the slider to the right to increase or decrease the speed of the light pattern.  The speed automatically increases at level 6, 10, and 14.  Speed values range from 1-9.  Player gets one extra point for every level of speed times possible multipliers for reverse and timer</div>
-                  </div>
-              </td>
-              <td><input type="range" min="1" max="9" value="5" class="slider" id="myRange"></td>
-            </tr>
-          </table>
+            </div>
+            <div class="switch">
+              <input id="timerSwitch" class="cmn-toggle cmn-toggle-round" type="checkbox">
+              <label for="timerSwitch"></label>
+            </div>
+            <div class="switch">
+              <input type="range" min="1" max="9" value="5" class="slider" id="myRange"></td>
+            </div>
           </div>
         </div>
-          <div class="right bottom">
-            <a href="" class="switchLabel" id="instructions">Game Rules</a>
-            <div class="box" id="instructionsBox">1. Press the START button. Simon will give you two signals.  Repeat the signal by pressing the same color lens.<br>2. Simon will duplicate the first two signals and add one.  Repeat these three signals by pressing the same color lesnes, in order.<br>3. Continue playing as long as you can repeat each sequence of signals correctly.  After the 5th, 9th, and 13th levels, Simon automatically speeds up.<br>5. If you fail to repeat a sequence exactly, or if you take more than 10 seconds to start entering the signal (if the timer is on), this means you've lost.</div>
-          </div>
-        </nav>
-      </section>
+      </div>
+      <div class="right bottom">
+        <a href="" class="switchLabel" id="instructions">Game Rules</a>
+        <div class="box" id="instructionsBox">1. Press the START button. Simon will give you two signals.  Repeat the signal by pressing the same color lens.<br>2. Simon will duplicate the first two signals and add one.  Repeat these three signals by pressing the same color lesnes, in order.<br>3. Continue playing as long as you can repeat each sequence of signals correctly.  After the 5th, 9th, and 13th levels, Simon automatically speeds up.<br>5. If you fail to repeat a sequence exactly, or if you take more than 10 seconds to start entering the signal (if the timer is on), this means you've lost.</div>
+      </div>
+    </nav>
   </body>
 </html>

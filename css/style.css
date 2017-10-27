@@ -12,7 +12,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 65%;
-  margin: 4% 0% 4% 10%;
+  margin: 0% 0% 4% 10%;
 }
 
 nav {
@@ -69,7 +69,7 @@ nav {
   height: 50%;
   min-height: 50%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
 }
 
@@ -96,6 +96,10 @@ a {
   width: 100%;
 }
 
+.switch {
+  width: 50%;
+}
+
 #instructions {
   margin: 0 0 0 20px;
 }
@@ -103,24 +107,6 @@ a {
 #scoreDisplay {
   color: #b20000;
 }
-
-/*select.dropdown {
-  -webkit-appearance: button;
-  -webkit-user-select: none;
-  background-repeat: no-repeat;
-  background-color: #c0c0c0;
-  color: #555;
-  font-size: inherit;
-  margin: 5px 20px 5px 20px;
-  overflow: hidden;
-  padding: 5px 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 300px;
-  text-align: center;
-  border-radius: 12px;
-  height: 50px;
-}*/
 
 ::-webkit-scrollbar {
   width: 0px; /* remove scrollbar space */
@@ -134,64 +120,6 @@ a {
 
 .countdown {
   font-size: 25px;
-}
-
-.button {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 3.25% 20%;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 30px;
-  border-radius: 12px;
-  opacity: 0.5;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-    right: 0;
-    padding: 3.25% 25%;
-  }
-}
-
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: "\00bb";
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -25%;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25%;
-  padding-left: 25%;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.button:hover {
-  opacity: 1;
-  padding: 3.25% 15%;
-  transition: 1s;
-  animation-play-state: paused;
 }
 
 #titleText {
@@ -261,173 +189,28 @@ h2 {
   width: 100%; /* Width of the outside container */
 }
 
-.slider {
-  -webkit-appearance: none;
-  width: 82px;
-  height: 44px;
-  border-radius: 20px;
-  background: #f1f1f1;
-  outline: none;
-  -webkit-transition: 0.2s;
-  transition: opacity 0.2s;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 40px;
-  height: 44px;
-  border-radius: 50%;
-  background: #4caf50;
-  cursor: pointer;
-  opacity: 0.5;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.slider::-webkit-slider-thumb:hover {
-  opacity: 1;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #4caf50;
-  cursor: pointer;
-}
-
-/*everything below is for the switch*/
-
-.cmn-toggle {
-  position: absolute;
-  margin-left: -9999px;
-  visibility: hidden;
-}
-.cmn-toggle + label {
-  display: block;
-  position: relative;
-  cursor: pointer;
-  outline: none;
-  user-select: none;
-}
-
-input.cmn-toggle-round + label {
-  padding: 2px;
-  width: 80px;
-  height: 40px;
-  background-color: #c0c0c0;
-  border-radius: 40px;
-}
-input.cmn-toggle-round + label:before,
-input.cmn-toggle-round + label:after {
-  display: block;
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  bottom: 1px;
-  content: "";
-}
-input.cmn-toggle-round + label:before {
-  right: 1px;
-  background-color: #f1f1f1;
-  border-radius: 40px;
-  transition: background 0.4s;
-}
-input.cmn-toggle-round + label:after {
-  width: 39px;
-  background-color: #fff;
-  border-radius: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: margin 0.4s;
-}
-input.cmn-toggle-round:checked + label:before {
-  background-color: #4caf50;
-}
-input.cmn-toggle-round:checked + label:after {
-  margin-left: 40px;
-}
-
-/*everything below is for the hover boxes*/
-
-.box {
-  display: none;
-  position: absolute;
-  top: 30px;
-  left: 10px;
-  background: #c0c0c0;
-  padding: 5px;
-  border: 1px solid black;
-  width: 300px;
-  font-size: 14px;
-  left: 40%;
-}
-
-#scoreDisplay:hover + #scoreBox {
-  display: block;
-  top: 25%;
-  color: black;
-}
-
-#reverse:hover + #reverseBox {
-  display: block;
-  top: 50%;
-}
-
-#timer:hover + #timerBox {
-  display: block;
-  top: 57%;
-}
-
-#sliderValue:hover + #speedBox {
-  display: block;
-  top: 60%;
-}
-
-#instructions:hover + #instructionsBox {
-  display: block;
-  top: 30%;
-  left: 25%;
-}
-
-/*for the high score table*/
-.scoreTable {
-  font-size: 25px;
-  width: 50%;
-  margin: 0 auto;
-}
-
-/*for the name input modal if you get a high score*/
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
 @media screen and (max-width: 500px) {
   body {
     flex-direction: column;
     height: 100%;
+    flex-wrap: wrap;
+    margin: 0px;
   }
   main {
     width: 100%;
+    margin: 4% 1% 4% auto;
   }
   nav {
     width: 100%;
+    margin: 2% auto 2% 0%;
+  }
+  #gameBoard {
+    height: 300px;
+    width: 100vw;
+  }
+
+  #topInfo {
+    text-align: center;
+    width: 100vw;
   }
 }
