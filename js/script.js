@@ -23,10 +23,10 @@ $(document).ready(function() {
   let userTurn = false;
   //used for a loop later
   let loopIndex = 0;
-  //how many seconds a user has to answer, if the timer is on
-  let defaultTimeLeft = 10;
+  //the minimum seconds the user has to answer
+  let minTimeLeft = 5;
   //intially set to the default value, but decreases every second
-  let timeLeft = defaultTimeLeft;
+  let timeLeft = 0;
   //a variable used in the function to create the timer
   let timer;
   //a variable that will be replaced by user input if they get a high enough score
@@ -150,6 +150,8 @@ $(document).ready(function() {
       if (++loopIndex >= sequence.length) {
         //make it the user's turn
         userTurn = true;
+        //set the timer to the maximum of the level (e.g. 6 seconds for level 6) or 5 seconds
+        timeLeft = Math.max(minTimeLeft, level);
         //and turn on the timer program, which will run every 1000 milliseconds
         timer = setInterval(function() {
           responseTimer();
@@ -309,7 +311,6 @@ $(document).ready(function() {
     userAnswer = [];
     userTurn = false;
     loopIndex = 0;
-    timeLeft = defaultTimeLeft;
     stopTimer();
     showElements();
     $(".countdown").text(``);
@@ -369,13 +370,13 @@ $(document).ready(function() {
     startButton.show();
   }
 
-  //if the timer is one, count down from 10 and change to red once there are 5 seconds left
+  //if the timer is one, count down and change to red once there are 5 seconds left
   //note, function is run using SetInterval every second in the LoopSequence function
   function responseTimer() {
     if ($("#timerSwitch").is(":checked")) {
       timeLeft--;
-      $(".countdown").text(`Must begin answering within ${timeLeft} Seconds`);
-      if (timeLeft <= defaultTimeLeft / 2) {
+      $(".countdown").text(`Must answer within ${timeLeft} Seconds`);
+      if (timeLeft <= minTimeLeft) {
         $(".countdown").css("color", "#b20000");
       }
       if (timeLeft <= 0) {
@@ -453,10 +454,10 @@ $(document).ready(function() {
     ) {
       userAnswer.push(codes[$(e.target).attr("id")]);
       //stops the timer from running
-      stopTimer();
       flashLight($(e.target));
       //once the array is full, start checking if the answer is right
       if (userAnswer.length === sequence.length) {
+        stopTimer();
         checkAnswer(sequence, userAnswer);
       }
     }

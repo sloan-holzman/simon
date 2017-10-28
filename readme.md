@@ -8,7 +8,7 @@ A game for generating patterns which are expressed through lights flashing, and 
 
 - Users can click start to have the application generate a pattern, which gets flashed on the screen
 - Users can match the pattern by clicking on the same lights
-- Users can decide to turn on a timer (which decides how quickly the lights are flashed)
+- Users can decide to turn on a timer (which sets a countdown for how quickly the user must answer)
 - Users can decide to turn on 'reverse' (which requires the user to enter the pattern backwards)
 - User can change the speed for how quickly the lights flash
 - The application checks if the pattern is correct and/or if the user has started entering the pattern within the alloted time (if the timer is on)

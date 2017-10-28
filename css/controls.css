@@ -2,7 +2,7 @@
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 3.25% 20%;
+  padding: 3.25% 15%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -19,11 +19,11 @@
   100% {
     opacity: 1;
     right: 0;
-    padding: 3.25% 25%;
+    padding: 3.25% 20%;
   }
 }
 
-.button span {
+/*.button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -47,11 +47,11 @@
 .button:hover span:after {
   opacity: 1;
   right: 0;
-}
+}*/
 
 .button:hover {
   opacity: 1;
-  padding: 3.25% 15%;
+  padding: 3.25% 20%;
   transition: 1s;
   animation-play-state: paused;
 }
@@ -221,5 +221,8 @@ input.cmn-toggle-round:checked + label:after {
       right: 0;
       padding: 3.25% 15%;
     }
+  }
+  .box {
+    left: 5%;
   }
 }
