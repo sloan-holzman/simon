@@ -200,7 +200,7 @@ $(document).ready(function() {
       //if answer is wrong, changes title to wrong answer, and runs checkHighScore (i.e. check if the user's score qualifies for high score)
       if (answer[i] !== userInput[userInputIndex]) {
         $("#titleText")
-          .text("WRONG! GAME OVER")
+          .text("GAME OVER!")
           .css("color", "#b20000");
         checkHighScore();
         return;
@@ -380,7 +380,7 @@ $(document).ready(function() {
       }
       if (timeLeft <= 0) {
         $("#titleText")
-          .text(`You ran out of time.  GAME OVER!`)
+          .text(`OUT OF TIME!`)
           .css("color", "#b20000");
         checkHighScore();
       }

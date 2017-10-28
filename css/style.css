@@ -9,10 +9,6 @@ body {
 }
 
 main {
-  /*
-    max-width
-    margin: 0 auto;
-  */
   display: flex;
   flex-grow: 2;
   flex-direction: column;
@@ -49,9 +45,9 @@ nav {
 
 #gameBoard {
   flex-grow: 9;
-  /*
-    flex 2
-  */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .lights {
@@ -213,6 +209,18 @@ h2 {
   width: 100%; /* Width of the outside container */
 }
 
+/*for the high score table*/
+.scoreTable {
+  font-size: 30px;
+  width: 50%;
+  margin: 0 auto;
+  max-height: 60vh;
+}
+
+.highScoreTable {
+  height: 100%;
+}
+
 @media screen and (max-width: 749px) {
   body {
     flex-wrap: wrap;
@@ -223,12 +231,18 @@ h2 {
     min-width: 250px;
     margin: 0 auto;
   }
+  .top {
+    min-height: 15%;
+  }
+
+  #form {
+    margin-top: 2%;
+  }
+
   nav {
     max-width: 500px;
     min-width: 250px;
     margin: 0 auto;
-  }
-  #gameBoard {
   }
 
   #topInfo {
@@ -255,5 +269,15 @@ h2 {
 
   #instructions {
     margin: 0;
+  }
+
+  .countdown {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .scoreTable {
+    font-size: 22px;
   }
 }

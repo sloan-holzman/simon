@@ -184,13 +184,6 @@ input.cmn-toggle-round:checked + label:after {
   left: 25%;
 }
 
-/*for the high score table*/
-.scoreTable {
-  font-size: 25px;
-  width: 50%;
-  margin: 0 auto;
-}
-
 /*for the name input modal if you get a high score*/
 .modal {
   display: none; /* Hidden by default */
@@ -216,6 +209,17 @@ input.cmn-toggle-round:checked + label:after {
 
 @media screen and (max-width: 500px) {
   .button {
-    padding: 3.25% 10%;
+    font-size: 22px;
+    padding: 3.25% 7%;
+  }
+  @keyframes pulse {
+    0% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+      right: 0;
+      padding: 3.25% 15%;
+    }
   }
 }
