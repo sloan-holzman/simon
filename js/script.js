@@ -265,14 +265,7 @@ $(document).ready(function() {
     resetSpeed();
     //display the new high scores
     updateScoreDisplay();
-    $("span").text("Start New Game");
-    $(".scoreList").empty();
-    //after 3 seconds, update the header back to Simon
-    setTimeout(function() {
-      $("#titleText")
-        .text("SIMON")
-        .css("color", "black");
-    }, 3000);
+    updateOtherDisplays();
   }
 
   //reset the speed slider display and value
@@ -281,6 +274,18 @@ $(document).ready(function() {
     slider.val(`${speed}`);
     sliderDisplay.text(`Speed: ${speed}`);
     delay = speedValues[`${speed}`].milliseconds;
+  }
+
+  //update the header and the button text
+  function updateOtherDisplays() {
+    $("span").text("Start New Game");
+    // $(".scoreList").empty();
+    //after 3 seconds, update the header back to Simon
+    setTimeout(function() {
+      $("#titleText")
+        .text("SIMON")
+        .css("color", "black");
+    }, 3000);
   }
 
   //reset some of the key variables, necessary when changing levels or restarting the game
