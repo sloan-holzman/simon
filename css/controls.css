@@ -1,3 +1,4 @@
+/*copied some of the button code from https://www.w3schools.com/css/css3_buttons.asp */
 .button {
   background-color: #4caf50;
   border: none;
@@ -23,38 +24,15 @@
   }
 }
 
-/*.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: "\00bb";
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -25%;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25%;
-  padding-left: 25%;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}*/
-
 .button:hover {
   opacity: 1;
   padding: 3.25% 20%;
   transition: 1s;
   animation-play-state: paused;
 }
+
+/*the code below is for the speed slider*/
+/*copied most of the slider code from https://www.w3schools.com/howto/howto_js_rangeslider.asp */
 
 .slider {
   -webkit-appearance: none;
@@ -92,7 +70,7 @@
 }
 
 /*everything below is for the switch*/
-
+/*Copied most of the toggle code from http://callmenick.com/post/css-toggle-switch-examples*/
 .cmn-toggle {
   position: absolute;
   margin-left: -9999px;
@@ -143,7 +121,7 @@ input.cmn-toggle-round:checked + label:after {
 }
 
 /*everything below is for the hover boxes*/
-
+/*copied some of the code from http://jsfiddle.net/mcdqt/*/
 .box {
   display: none;
   position: absolute;
@@ -185,6 +163,7 @@ input.cmn-toggle-round:checked + label:after {
 }
 
 /*for the name input modal if you get a high score*/
+/*copied most of the modal code from https://www.w3schools.com/bootstrap/bootstrap_modal.asp*/
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
