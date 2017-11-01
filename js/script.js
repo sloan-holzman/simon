@@ -369,6 +369,7 @@ $(document).ready(function() {
         $("#titleText")
           .text(`OUT OF TIME!`)
           .css("color", "#b20000");
+        stopTimer();
         checkHighScore();
       }
     }
@@ -462,9 +463,6 @@ $(document).ready(function() {
     createSequence(level);
     //flashes it to the user
     loopSequence(sequence);
-    $("#titleText")
-      .text(`SIMON`)
-      .css("color", "black");
   });
 
   // Update the current slider value (each time you drag the slider handle)
