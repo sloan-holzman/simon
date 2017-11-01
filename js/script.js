@@ -358,6 +358,7 @@ $(document).ready(function() {
 
   //if the timer is one, count down and change to red once there are 5 seconds left
   //note, function is run using SetInterval every second in the LoopSequence function
+  //learned how to make timer from stackoverflow...https://stackoverflow.com/questions/3089475/how-can-i-create-a-5-second-countdown-timer-with-jquery-that-ends-with-a-login-p
   function responseTimer() {
     if ($("#timerSwitch").is(":checked")) {
       timeLeft--;
