@@ -39,7 +39,10 @@ $(document).ready(function() {
   let timerBonus = 1;
   //each level, they start with zero points and it will go up if they get the answer correct and then it will be added to the overall score
   let points = 0;
-  // let introSequence = [1, 2, 4, 3];
+  // let's you know if one of the high scores need to be popped from the array
+  let mustPop = false;
+  // create an empty array to store high scores
+  let highScores = [];
 
   //each light corresponds to a value, which will be pushed into the sequence and useAnswer arrays
   let codes = {
@@ -48,30 +51,6 @@ $(document).ready(function() {
     light3: 3,
     light4: 4
   };
-  // let speeds = {
-  //   1: 1000,
-  //   2: 900,
-  //   3: 800,
-  //   4: 700,
-  //   5: 600,
-  //   6: 500,
-  //   7: 400,
-  //   8: 300,
-  //   9: 200
-  // };
-  //
-  // //clean this up later to combine speeds and points into one object/array structure
-  // let basePoints = {
-  //   1: 1,
-  //   2: 2,
-  //   3: 3,
-  //   4: 4,
-  //   5: 5,
-  //   6: 6,
-  //   7: 7,
-  //   8: 8,
-  //   9: 9
-  // };
 
   //the milliseconds and points associated with each speed level (1-9), which is the user sets with the slider
   const speedValues = {
@@ -145,7 +124,7 @@ $(document).ready(function() {
     //after the delay...
     setTimeout(function() {
       // flash the a light in the sequence
-      checkLight(sequence[loopIndex]);
+      checkWhichLight(sequence[loopIndex]);
       // if it's the end of the array has been reached, stop the function...
       if (++loopIndex >= sequence.length) {
         //make it the user's turn
@@ -156,6 +135,7 @@ $(document).ready(function() {
         timer = setInterval(function() {
           responseTimer();
         }, 1000);
+        console.log(sequence);
         return;
       }
       //...if not, run through the function again
@@ -163,8 +143,8 @@ $(document).ready(function() {
     }, delay);
   }
 
-  //checkLight reads a number and runs flashLight for the corresponding div
-  function checkLight(light) {
+  //checkWhichLight reads a number and runs flashLight for the corresponding div
+  function checkWhichLight(light) {
     switch (light) {
       case 1:
         flashLight(firstLight);
@@ -216,16 +196,15 @@ $(document).ready(function() {
   function checkHighScore() {
     //if there's already a list of high scores in store, pull it into the variable highScores
     if (localStorage.highScores) {
-      var highScores = JSON.parse(localStorage.highScores);
-    } else {
-      //if not, create an empty array
-      var highScores = [];
+      highScores = JSON.parse(localStorage.highScores);
     }
-    //if there are less than 10 high scores, the score automatically qualifies
+    // if fewer than 10 high scores, ask user to input name (definitely in top 10)
     if (highScores.length < 10) {
       inputName();
       //if there are more than 10, it has to be higher than the 10th highest score
     } else if (score > highScores[9].score) {
+      //signal for when adding the score that one of the existing scores has to be dropped (popped)
+      mustPop = true;
       inputName();
       //if not higher than 10th highest, just restart the game
     } else {
@@ -246,32 +225,24 @@ $(document).ready(function() {
     addHighScore();
   });
 
-  //will need to refactor this...it's too long!
   //create a new high score, add it to the list, and re-order the list, then restart the game
   function addHighScore() {
-    if (localStorage.highScores) {
-      var highScores = JSON.parse(localStorage.highScores);
-    } else {
-      var highScores = [];
-    }
-    if (highScores.length < 10) {
-      let newScore = new HighScore();
-      highScores.push(newScore);
-      highScores.sort(function(a, b) {
-        return b.score - a.score;
-      });
-      localStorage.highScores = JSON.stringify(highScores);
-      restartGame();
-    } else if (score > highScores[9].score) {
-      let newScore = new HighScore();
+    //if there are more than 10 high scores and the user is higher than the 10th, drop the 10th
+    if (mustPop) {
       highScores.pop();
-      highScores.push(newScore);
-      highScores.sort(function(a, b) {
-        return b.score - a.score;
-      });
-      localStorage.highScores = JSON.stringify(highScores);
-      restartGame();
     }
+    //create the new high score
+    let newScore = new HighScore();
+    //add it to the top ten
+    highScores.push(newScore);
+    //resort from highest to lowest
+    highScores.sort(function(a, b) {
+      return b.score - a.score;
+    });
+    //save it to local storage
+    localStorage.highScores = JSON.stringify(highScores);
+    //restart the game
+    restartGame();
   }
 
   //this creates the new high score
@@ -291,6 +262,7 @@ $(document).ready(function() {
     resetVariables();
     score = 0;
     speed = defaultSpeed;
+    mustPop = false;
     slider.val(`${speed}`);
     sliderDisplay.text(`Speed: ${speed}`);
     delay = speedValues[`${speed}`].milliseconds;
