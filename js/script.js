@@ -181,15 +181,20 @@ $(document).ready(function() {
       }
       //if answer is wrong, changes title to wrong answer, and runs checkHighScore (i.e. check if the user's score qualifies for high score)
       if (answer[i] !== userInput[userInputIndex]) {
-        $("#titleText")
-          .text("GAME OVER!")
-          .css("color", "#b20000");
+        gameOverDisplay();
         checkHighScore();
         return;
       }
     }
     //if none of the answers are wrong, run increase level
     increaseLevel();
+  }
+
+  //change the header to say "GAME OVER!"
+  function gameOverDisplay() {
+    $("#titleText")
+      .text("GAME OVER!")
+      .css("color", "#b20000");
   }
 
   //checks if the score is high enough to qualify for top 10
@@ -253,7 +258,6 @@ $(document).ready(function() {
     }
   }
 
-  //too long...will need to refactor
   //refresh some key variables, clear out the sequence of correct answers
   function restartGame() {
     level = 1;
