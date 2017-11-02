@@ -25,6 +25,8 @@ You definitely met the technical requirements for the project, as well as the bo
 
 You did meet all the technical requirements and the bonuses, I would have really liked to see you using a more object-oriented approach to your project. This would have been a really great opportunity to use classes.
 
+Additionally, all your code is on the `gh-pages` branch and it appears that your master branch has grown stale (i.e. behind the latest updates). This is a bad practice. You want to think of you master branch as the main branch and it should always be up to date with "production" (i.e. the final/stable version of your codebase). You probably shouldn't commit directly to gh-pages, instead commit to master or a feature-branch and merge your changes when you're ready to deploy.
+
 ## Code Quality:
 
 > Did you follow code style guidance and best practices covered in class, such as spacing, modularity, and semantic naming? Did you comment your code?
