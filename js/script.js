@@ -123,8 +123,7 @@ $(document).ready(function() {
   function loopSequence(sequence) {
     //after the delay...
     setTimeout(function() {
-      // flash the a light in the sequence
-      checkWhichLight(sequence[loopIndex]);
+      flashLight($('div[data-light="' + sequence[loopIndex] + '"]'));
       // if it's the end of the array has been reached, stop the function...
       if (++loopIndex >= sequence.length) {
         //make it the user's turn
@@ -141,24 +140,6 @@ $(document).ready(function() {
       //...if not, run through the function again
       loopSequence(sequence);
     }, delay);
-  }
-
-  //checkWhichLight reads a number and runs flashLight for the corresponding div
-  function checkWhichLight(light) {
-    switch (light) {
-      case 1:
-        flashLight(firstLight);
-        break;
-      case 2:
-        flashLight(secondLight);
-        break;
-      case 3:
-        flashLight(thirdLight);
-        break;
-      case 4:
-        flashLight(fourthLight);
-        break;
-    }
   }
 
   //flashes the light (turns the opacity up to 1 for half the delay)
@@ -440,8 +421,7 @@ $(document).ready(function() {
       userTurn &&
       $(e.target).is(".light")
     ) {
-      userAnswer.push(codes[$(e.target).attr("id")]);
-      //stops the timer from running
+      userAnswer.push(parseInt($(e.target).attr("data-light")));
       flashLight($(e.target));
       //once the array is full, start checking if the answer is right
       if (userAnswer.length === sequence.length) {
