@@ -18,6 +18,10 @@ main {
   margin: 0 0 0 auto;
 }
 
+form {
+  width: 100%;
+}
+
 nav {
   flex-direction: column;
   flex-grow: 1;
@@ -25,6 +29,17 @@ nav {
   min-width: 100px;
   width: 200px;
   margin: 0 auto 0 0;
+}
+
+.input-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+input {
+  width: 50%;
+  background-color: green;
 }
 
 .top {
@@ -97,15 +112,10 @@ nav {
 
 .right.bottom {
   text-align: left;
-  padding: 0px 0px 0px 5px;
+  padding: 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-.option-row {
-  display: flex;
-  flex-direction: row;
 }
 
 a {
@@ -114,16 +124,12 @@ a {
 }
 
 .switch-label {
-  margin: 5px 20px 5px 20px;
-  width: 100%;
-}
-
-.switch {
-  width: 50%;
+  margin: 5px 0px 5px 0px;
+  width: 40%;
 }
 
 #instructions {
-  margin: 0 0 0 20px;
+  margin: 0px;
 }
 
 #score-display {
@@ -137,7 +143,7 @@ a {
 
 .stats {
   font-size: 25px;
-  margin: 5px 20px 5px 20px;
+  margin: 5px 0px 5px 0px;
 }
 
 .countdown {
@@ -183,24 +189,25 @@ h2 {
 
 .slider-value {
   text-align: center;
+  background-color: purple;
 }
 
-#light1 {
+.green {
   background-color: green;
   border-top-left-radius: 250px;
 }
 
-#light2 {
+.red {
   background-color: red;
   border-top-right-radius: 250px;
 }
 
-#light3 {
+.yellow {
   background-color: yellow;
   border-bottom-left-radius: 250px;
 }
 
-#light4 {
+.blue {
   background-color: blue;
   border-bottom-right-radius: 250px;
 }
@@ -221,7 +228,7 @@ h2 {
   height: 100%;
 }
 
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 764px) {
   body {
     flex-wrap: wrap;
     margin: 0 auto;
@@ -234,7 +241,9 @@ h2 {
   .top {
     min-height: 15%;
   }
-
+  .switch-label {
+    width: 30%;
+  }
   #form {
     margin-top: 2%;
   }
@@ -250,9 +259,7 @@ h2 {
   }
   #bottom-info {
   }
-  .option-row {
-    display: flex;
-    flex-direction: row;
+  .input-row {
     justify-content: center;
   }
 

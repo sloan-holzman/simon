@@ -2,10 +2,6 @@ $(document).ready(function() {
   //collecting elements
   let levelDisplay = $("#level");
   let lights = $(".lights");
-  let firstLight = $("#light1");
-  let secondLight = $("#light2");
-  let thirdLight = $("#light3");
-  let fourthLight = $("#light4");
   let startButton = $("#start");
   let slider = $("#my-range");
   let sliderDisplay = $("#slider-value");
@@ -322,7 +318,9 @@ $(document).ready(function() {
       timerBonus = 1;
     }
     // points = basePoints[`${speed}`] * reverseBonus * timerBonus;
-    points = speedValues[`${speed}`].points * reverseBonus * timerBonus;
+    points = Math.round(
+      speedValues[`${speed}`].points * reverseBonus * timerBonus
+    );
   }
 
   //hide reverse, timer, and speed so that player can't touch them after the sequence has started flashing
