@@ -135,28 +135,28 @@ input.cmn-toggle-round:checked + label:after {
   left: 40%;
 }
 
-#scoreDisplay:hover + #scoreBox {
+#score-display:hover + #score-box {
   display: block;
   top: 25%;
   color: black;
 }
 
-#reverse:hover + #reverseBox {
+#reverse:hover + #reverse-box {
   display: block;
   top: 50%;
 }
 
-#timer:hover + #timerBox {
+#timer:hover + #timer-box {
   display: block;
   top: 57%;
 }
 
-#sliderValue:hover + #speedBox {
+#slider-value:hover + #speed-box {
   display: block;
   top: 60%;
 }
 
-#instructions:hover + #instructionsBox {
+#instructions:hover + #instructions-box {
   display: block;
   top: 30%;
   left: 25%;

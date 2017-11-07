@@ -7,10 +7,10 @@ $(document).ready(function() {
   let thirdLight = $("#light3");
   let fourthLight = $("#light4");
   let startButton = $("#start");
-  let slider = $("#myRange");
-  let sliderDisplay = $("#sliderValue");
-  let scoreDisplay = $("#scoreDisplay");
-  let highestScore = $("#highScore");
+  let slider = $("#my-range");
+  let sliderDisplay = $("#slider-value");
+  let scoreDisplay = $("#score-display");
+  let highestScore = $("#high-score");
   let nameSubmit = $(".submit");
   //declaring key variables and setting initial values
   //this will go up each round
@@ -103,7 +103,7 @@ $(document).ready(function() {
   slider.val(`${speed}`);
   sliderDisplay.text(`Speed: ${speed}`);
   //the high score table is hidden to start.  it will show up when the game is over
-  $(".highScoreTable").hide();
+  $(".high-score-table").hide();
 
   //creates the sequence of lights that the player has to match
   function createSequence(level) {
@@ -173,7 +173,7 @@ $(document).ready(function() {
   function checkAnswer(answer, userInput) {
     for (let i = 0; i < answer.length; i++) {
       //checks if reverse order if set to reverse
-      if ($("#reverseSwitch").is(":checked")) {
+      if ($("#reverse-switch").is(":checked")) {
         var userInputIndex = userInput.length - i - 1;
         //runs in regular order if not set to reverse
       } else {
@@ -192,7 +192,7 @@ $(document).ready(function() {
 
   //change the header to say "GAME OVER!"
   function gameOverDisplay() {
-    $("#titleText")
+    $("#title-text")
       .text("GAME OVER!")
       .css("color", "#b20000");
   }
@@ -219,14 +219,14 @@ $(document).ready(function() {
 
   //pops up the form for the user to enter their name (to be recorded in high scores)
   function inputName() {
-    $("#myModal").css("display", "block");
+    $("#my-modal").css("display", "block");
   }
 
   //after the user enters his/her name, hide the form and run addHighScore
   nameSubmit.click(function(e) {
     e.preventDefault();
     name = $("input").val();
-    $("#myModal").css("display", "none");
+    $("#my-modal").css("display", "none");
     addHighScore();
   });
 
@@ -286,7 +286,7 @@ $(document).ready(function() {
     // $(".scoreList").empty();
     //after 3 seconds, update the header back to Simon
     setTimeout(function() {
-      $("#titleText")
+      $("#title-text")
         .text("SIMON")
         .css("color", "black");
     }, 3000);
@@ -314,7 +314,7 @@ $(document).ready(function() {
     score += points;
     resetVariables();
     updateScoreDisplay();
-    $("#titleText")
+    $("#title-text")
       .text(`CORRECT!`)
       .css("color", "#4caf50");
   }
@@ -330,12 +330,12 @@ $(document).ready(function() {
 
   //calculate how many points were earned at the end of each level
   function decidePoints() {
-    if ($("#reverseSwitch").is(":checked")) {
+    if ($("#reverse-switch").is(":checked")) {
       reverseBonus = 1.5;
     } else {
       reverseBonus = 1;
     }
-    if ($("#timerSwitch").is(":checked")) {
+    if ($("#timer-switch").is(":checked")) {
       timerBonus = 1.5;
     } else {
       timerBonus = 1;
@@ -346,13 +346,13 @@ $(document).ready(function() {
 
   //hide reverse, timer, and speed so that player can't touch them after the sequence has started flashing
   function hideElements() {
-    $(".optionRow").hide();
+    $(".option-row").hide();
     startButton.hide();
   }
 
   //bring back reverse, timer, and speed after the level is over
   function showElements() {
-    $(".optionRow").show();
+    $(".option-row").show();
     startButton.show();
   }
 
@@ -360,14 +360,14 @@ $(document).ready(function() {
   //note, function is run using SetInterval every second in the LoopSequence function
   //learned how to make timer from stackoverflow...https://stackoverflow.com/questions/3089475/how-can-i-create-a-5-second-countdown-timer-with-jquery-that-ends-with-a-login-p
   function responseTimer() {
-    if ($("#timerSwitch").is(":checked")) {
+    if ($("#timer-switch").is(":checked")) {
       timeLeft--;
       $(".countdown").text(`Must answer within ${timeLeft} Seconds`);
       if (timeLeft <= minTimeLeft) {
         $(".countdown").css("color", "#b20000");
       }
       if (timeLeft <= 0) {
-        $("#titleText")
+        $("#title-text")
           .text(`OUT OF TIME!`)
           .css("color", "#b20000");
         stopTimer();
@@ -401,7 +401,7 @@ $(document).ready(function() {
   function showHighScores() {
     $(".lights").hide();
     hideElements();
-    $(".scoreTable").empty();
+    $(".score-table").empty();
     tr = document.createElement("tr");
     td1 = document.createElement("td");
     tr.appendChild(td1);
@@ -412,7 +412,7 @@ $(document).ready(function() {
     td3 = document.createElement("td");
     tr.appendChild(td3);
     td3.innerHTML = "Scores";
-    $(".scoreTable").append(tr);
+    $(".score-table").append(tr);
     var highScores = JSON.parse(localStorage.highScores);
     for (let k = 0; k < highScores.length; k++) {
       tr = document.createElement("tr");
@@ -425,10 +425,10 @@ $(document).ready(function() {
       td3 = document.createElement("td");
       tr.appendChild(td3);
       td3.innerHTML = highScores[k].score;
-      $(".scoreTable").append(tr);
+      $(".score-table").append(tr);
     }
     //then shows the table
-    $(".highScoreTable").show();
+    $(".high-score-table").show();
   }
 
   //when each light is clicked, adds a number to the userAnswer array
@@ -455,7 +455,7 @@ $(document).ready(function() {
   startButton.click(function(e) {
     e.preventDefault();
     //hides the high score table
-    $(".highScoreTable").hide();
+    $(".high-score-table").hide();
     //shows the gameboard
     $(".lights").show();
     //hides the Return, Timer, and Speed
