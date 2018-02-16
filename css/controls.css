@@ -1,4 +1,4 @@
-/*copied some of the button code from https://www.w3schools.com/css/css3_buttons.asp */
+/*copied some of the button styling from https://www.w3schools.com/css/css3_buttons.asp */
 .button {
   background-color: #4caf50;
   border: none;
@@ -70,7 +70,7 @@
 }
 
 /*everything below is for the switch*/
-/*Copied most of the toggle code from http://callmenick.com/post/css-toggle-switch-examples*/
+/*Copied some of the toggle styling from http://callmenick.com/post/css-toggle-switch-examples*/
 .cmn-toggle {
   position: absolute;
   margin-left: -9999px;
@@ -163,7 +163,7 @@ input.cmn-toggle-round:checked + label:after {
 }
 
 /*for the name input modal if you get a high score*/
-/*copied most of the modal code from https://www.w3schools.com/bootstrap/bootstrap_modal.asp*/
+/*copied most of the modal styling from https://www.w3schools.com/bootstrap/bootstrap_modal.asp*/
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -184,24 +184,4 @@ input.cmn-toggle-round:checked + label:after {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
-}
-
-@media screen and (max-width: 500px) {
-  .button {
-    font-size: 22px;
-    padding: 3.25% 7%;
-  }
-  @keyframes pulse {
-    0% {
-      opacity: 0.3;
-    }
-    100% {
-      opacity: 1;
-      right: 0;
-      padding: 3.25% 15%;
-    }
-  }
-  .box {
-    left: 5%;
-  }
 }

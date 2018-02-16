@@ -1,0 +1,68 @@
+.green {
+  background-color: green;
+  border-top-left-radius: 250px;
+}
+
+.red {
+  background-color: red;
+  border-top-right-radius: 250px;
+}
+
+.yellow {
+  background-color: yellow;
+  border-bottom-left-radius: 250px;
+}
+
+.blue {
+  background-color: blue;
+  border-bottom-right-radius: 250px;
+}
+
+.light {
+  width: 80%;
+  height: 80%;
+  opacity: 0.2;
+}
+
+.light-column {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.lights {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  height: 70vh;
+  min-height: 200px;
+  max-height: 800px;
+}
+
+#game-board {
+  flex-grow: 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#column-1 {
+  align-items: flex-end;
+}
+
+#column-2 {
+  align-items: flex-start;
+}
+
+
+/*for the high score table*/
+.score-table {
+  font-size: 30px;
+  width: 50%;
+  margin: 0 auto;
+  max-height: 60vh;
+}
+
+.high-score-table {
+  height: 100%;
+}

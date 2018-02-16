@@ -1,0 +1,79 @@
+@media screen and (max-width: 764px) {
+  body {
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+  main {
+    max-width: 500px;
+    min-width: 250px;
+    margin: 0 auto;
+  }
+
+  nav {
+    max-width: 500px;
+    min-width: 250px;
+    margin: 0 auto;
+  }
+
+  .top {
+    min-height: 15%;
+  }
+  .switch-label {
+    width: 30%;
+  }
+  #form {
+    margin-top: 2%;
+  }
+
+  #top-info {
+    align-items: center;
+  }
+  #bottom-info {
+  }
+  .input-row {
+    justify-content: center;
+  }
+
+  .right.bottom {
+    align-items: center;
+    text-align: center;
+    padding: 0px;
+    order: 2;
+  }
+
+  .right.top {
+    height: 0px;
+  }
+
+  #instructions {
+    margin: 0;
+  }
+
+  .countdown {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .score-table {
+    font-size: 22px;
+  }
+
+  .button {
+    font-size: 22px;
+    padding: 3.25% 7%;
+  }
+  @keyframes pulse {
+    0% {
+      opacity: 0.3;
+    }
+    100% {
+      opacity: 1;
+      right: 0;
+      padding: 3.25% 15%;
+    }
+  }
+  .box {
+    left: 5%;
+  }
+}

@@ -1,0 +1,32 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  font-family: "Anton", sans-serif;
+  background-color: #c0c0c0;
+  display: flex;
+  flex-direction: row;
+}
+
+main {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column;
+  max-width: 600px;
+  min-width: 300px;
+  width: 500px;
+  margin: 0 0 0 auto;
+}
+
+nav {
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 300px;
+  min-width: 100px;
+  width: 200px;
+  margin: 0 auto 0 0;
+}
+
+form {
+  width: 100%;
+}
