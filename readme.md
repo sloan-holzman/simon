@@ -2,8 +2,6 @@
 
 A game for generating patterns which are expressed through lights flashing, and then allowing the user to replicate the pattern by clicking on the same lights in the same order.
 
-![preview](simon-preview.tiff)
-
 # Current Features
 
 - Users can click start to have the application generate a pattern, which gets flashed on the screen
@@ -13,7 +11,7 @@ A game for generating patterns which are expressed through lights flashing, and 
 - User can change the speed for how quickly the lights flash
 - The application checks if the pattern is correct and/or if the user has started entering the pattern within the alloted time (if the timer is on)
 - If the pattern is correct, the level increases, the level points are calculated, and their overall score is increased
-- If the pattern is incorrect (or they do not start answering in time), the application checks if the user's score is within the top ten all time and then displays the top ten scores (including the user's if appropriate)
+- If the pattern is incorrect (or they do not start answering in time), the application checks if the user's score is within the top ten all time (only on the current computer) and then displays the top ten scores (including the user's if appropriate)
 
 # Technology Used
 
