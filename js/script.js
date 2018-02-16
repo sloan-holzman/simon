@@ -368,12 +368,12 @@ $(document).ready(function() {
   //displays the highest score of all time
   function displayHighestScore() {
     if (localStorage.highScores) {
-      var highScores = JSON.parse(localStorage.highScores);
+      highScores = JSON.parse(localStorage.highScores);
       highestScore.text(`High Score ${highScores[0].score}`);
     }
   }
 
-  //displays it when the screen starts
+// displays it when the screen starts
   displayHighestScore();
 
   //creates a row for each of the 10 highest scores
@@ -392,7 +392,7 @@ $(document).ready(function() {
     tr.appendChild(td3);
     td3.innerHTML = "Scores";
     $(".score-table").append(tr);
-    var highScores = JSON.parse(localStorage.highScores);
+    highScores = JSON.parse(localStorage.highScores);
     for (let k = 0; k < highScores.length; k++) {
       tr = document.createElement("tr");
       td1 = document.createElement("td");
